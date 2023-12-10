@@ -1,16 +1,20 @@
 [build-system]
-requires = ["hatchling", "pyside6", "pydantic"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
 name = "pywebchannel"
-version = "1.2"
+version = "1.3"
 authors = [
     { name = "Cihan Uyanik", email = "cihanuyanik34@gmail.com" },
 ]
 description = "This repository generates auto typescript files for QWebChannel python local backend. It enables you to build a stunning UI for your python project with web technologies."
 readme = "README.md"
 requires-python = ">=3.8"
+dependencies = [
+    "pyside6",
+    "pydantic"
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
