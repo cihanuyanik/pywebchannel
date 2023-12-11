@@ -393,17 +393,15 @@ this moment.
 
 ### 🎊🎈✌️ Congratulations!!! 🎊🎈✌️
 
-```
-You have successfully connected your python backend to your frontend. 
+You have successfully connected your python backend to your frontend.
 And started a tool application which is capable of generating typescript interfaces you need, by just watching
-changes in your backend. 
+changes in your backend.
 
 As long as you keep these tool active and running, it will update all the scripts automatically while you are changing
 your backend implementation, so your frontend will be up-to-date
 
-Now, you can check other examples and self-explained api. 
-Good luck on combining best of two worls. 
-```
+Now, you can check other examples and self-explained api.
+Good luck on combining best of two worls.
 
 ----------------------------------------------------------------
 
