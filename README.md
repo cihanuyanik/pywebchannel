@@ -1,6 +1,6 @@
-# TypescriptGenerator 🚀
+# Python Web Channel 🚀
 
-TypescriptGenerator is a tool that automatically generates TypeScript files for QWebChannel Python local backend. It
+`pywebchannel` is a tool that automatically generates TypeScript files for QWebChannel Python local backend. It
 allows you to create a stunning UI for your Python project using web technologies such as HTML, CSS, and JavaScript.
 
 With TypescriptGenerator, you can:
@@ -56,7 +56,6 @@ If you want to contribute to this project, you are more than welcome. Here are s
 - Suggest new features or improvements.
 - Submit pull requests with your code changes.
 - Share your feedback or suggestions.
-
 
 ## License 📄
 
