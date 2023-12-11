@@ -323,6 +323,7 @@ Successfully connected to backend
 
 When you expand the `QWebChannel` object on the console, you should see an `objects` and `HelloWorldController` inside
 it. If this is the case, you have successfully connected your python backend to your frontend
+
 ----------------------------------------------------------------
 
 - `Step 12`: Let's use it and let our `backend` say hello to `frontend`'. Just update your code as it should be:
