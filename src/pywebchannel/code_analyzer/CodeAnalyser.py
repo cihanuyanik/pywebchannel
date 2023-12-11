@@ -1,7 +1,7 @@
-from src.pywebchannel.code_analyzer.SupportedTypes import SupportedTypes
-from src.pywebchannel.code_analyzer.models.ControllerInterface import ControllerInterface
-from src.pywebchannel.code_analyzer.models.ModelInterface import ModelInterface
-from src.pywebchannel.code_analyzer.utils.Utils import Utils
+from pywebchannel.code_analyzer.SupportedTypes import SupportedTypes
+from pywebchannel.code_analyzer.models.ControllerInterface import ControllerInterface
+from pywebchannel.code_analyzer.models.ModelInterface import ModelInterface
+from pywebchannel.code_analyzer.utils.Utils import Utils
 
 
 class CodeAnalyzer:

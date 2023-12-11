@@ -1,4 +1,4 @@
-from src.pywebchannel.code_analyzer.utils.Utils import Utils
+from pywebchannel.code_analyzer.utils.Utils import Utils
 
 
 class Property:

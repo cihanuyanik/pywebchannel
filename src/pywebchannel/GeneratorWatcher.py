@@ -7,11 +7,11 @@ from typing import Optional, List, Dict
 
 from PySide6.QtCore import QObject, QFileSystemWatcher, QDir, QFileInfo
 
-from src.pywebchannel.code_analyzer.CodeAnalyser import CodeAnalyzer
-from src.pywebchannel.code_analyzer.models.Interface import Interface
-from src.pywebchannel.code_analyzer.utils.Generator import Generator
-from src.pywebchannel.code_analyzer.utils.Logger import Logger
-from src.pywebchannel.code_analyzer.utils.Utils import Utils
+from pywebchannel.code_analyzer.CodeAnalyser import CodeAnalyzer
+from pywebchannel.code_analyzer.models.Interface import Interface
+from pywebchannel.code_analyzer.utils.Generator import Generator
+from pywebchannel.code_analyzer.utils.Logger import Logger
+from pywebchannel.code_analyzer.utils.Utils import Utils
 
 
 class GeneratorWatcher(QFileSystemWatcher):
@@ -316,7 +316,7 @@ class GeneratorWatcher(QFileSystemWatcher):
                 # Log a warning message for the unprocessable member
                 Logger.warning(
                     f"The class/function, '{memberName}' cannot be processed. It must be a class derived from "
-                    f"'ControllerBase' or 'BaseModel' from Pydantic"
+                    f"'Controller' or 'BaseModel' from Pydantic"
                 )
 
         # Remove the duplicate dependencies

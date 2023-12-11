@@ -3,7 +3,7 @@ import sys
 
 from PySide6.QtCore import QCoreApplication
 
-from src.pywebchannel.GeneratorWatcher import GeneratorWatcher
+from pywebchannel import GeneratorWatcher
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
@@ -16,12 +16,12 @@ if __name__ == "__main__":
 
     # Add the directories to watch and their corresponding target directories
     dirsToWatch = [
-        "C:/DevelopmentWs/TypescriptGenerator/backend/controllers",
-        "C:/DevelopmentWs/TypescriptGenerator/backend/models",
+        "controllers",
+        "models",
     ]
     dirsAsDesti = [
-        "C:/DevelopmentWs/TypescriptGenerator/test",
-        "C:/DevelopmentWs/TypescriptGenerator/test",
+        "../frontend/src/api/controllers",
+        "../frontend/src/api/models",
     ]
     for i in range(len(dirsToWatch)):
         watcher.addDirectory(dirsToWatch[i], dirsAsDesti[i])

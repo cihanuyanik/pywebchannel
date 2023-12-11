@@ -2,9 +2,9 @@ from typing import List
 
 from PySide6.QtCore import QMetaObject
 
-from src.pywebchannel.code_analyzer.models.Property import Property
-from src.pywebchannel.code_analyzer.models.Signal import Signal
-from src.pywebchannel.code_analyzer.models.Slot import Slot
+from pywebchannel.code_analyzer.models.Property import Property
+from pywebchannel.code_analyzer.models.Signal import Signal
+from pywebchannel.code_analyzer.models.Slot import Slot
 
 
 class Interface:

@@ -1,13 +1,13 @@
 from PySide6.QtCore import QMetaMethod
 
-from src.pywebchannel.code_analyzer.SupportedTypes import SupportedTypes
-from src.pywebchannel.code_analyzer.models.Interface import Interface
-from src.pywebchannel.code_analyzer.models.Parameter import Parameter
-from src.pywebchannel.code_analyzer.models.Property import Property
-from src.pywebchannel.code_analyzer.models.Return import Return
-from src.pywebchannel.code_analyzer.models.Signal import Signal
-from src.pywebchannel.code_analyzer.models.Slot import Slot
-from src.pywebchannel.code_analyzer.utils.Utils import Utils
+from pywebchannel.code_analyzer.SupportedTypes import SupportedTypes
+from pywebchannel.code_analyzer.models.Interface import Interface
+from pywebchannel.code_analyzer.models.Parameter import Parameter
+from pywebchannel.code_analyzer.models.Property import Property
+from pywebchannel.code_analyzer.models.Return import Return
+from pywebchannel.code_analyzer.models.Signal import Signal
+from pywebchannel.code_analyzer.models.Slot import Slot
+from pywebchannel.code_analyzer.utils.Utils import Utils
 
 
 class ControllerInterface(Interface):

@@ -1,6 +1,6 @@
-from src.pywebchannel.code_analyzer.models.Interface import Interface
-from src.pywebchannel.code_analyzer.models.Property import Property
-from src.pywebchannel.code_analyzer.utils.Utils import Utils
+from pywebchannel.code_analyzer.models.Interface import Interface
+from pywebchannel.code_analyzer.models.Property import Property
+from pywebchannel.code_analyzer.utils.Utils import Utils
 
 
 class ModelInterface(Interface):
@@ -20,12 +20,12 @@ class ModelInterface(Interface):
 
         super().__init__(MetaClass)
         # Get the fields of the model class
-        fields = self.objectDict["__fields__"]
+        fields = self.objectDict["__annotations__"]
 
         # Create a property for each field
         for fieldName, field in fields.items():
             self.props.append(
-                Property(fieldName, Utils.simplyVariableType(field.type_.__name__))
+                Property(fieldName, Utils.simplyVariableType(field.__name__))
             )
 
         # Convert the types and codes of the properties

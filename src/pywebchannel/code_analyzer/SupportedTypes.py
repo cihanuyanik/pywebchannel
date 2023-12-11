@@ -2,5 +2,5 @@ from enum import StrEnum
 
 
 class SupportedTypes(StrEnum):
-    Controller = "ControllerBase"
+    Controller = "Controller"
     Model = "BaseModel"

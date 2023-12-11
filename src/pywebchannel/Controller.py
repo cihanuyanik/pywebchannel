@@ -7,7 +7,7 @@ from PySide6.QtCore import QObject, Slot
 from pydantic import BaseModel
 
 
-class ControllerBase(QObject):
+class Controller(QObject):
     """A base class for controllers that provides common functionality.
 
     Attributes:
@@ -29,7 +29,7 @@ class ControllerBase(QObject):
     __actionNotifications__: Dict[str, Dict[str, type]] = dict()
 
     def __init_subclass__(cls, **kwargs):
-        """A special method that is called when a subclass of ControllerBase is created.
+        """A special method that is called when a subclass of Controller is created.
 
         This method performs some operations on the class attributes to prepare them for the subclass.
 
@@ -395,8 +395,8 @@ def Action(notify: Notify = None):
                 # Convert first letter to upper case
                 notify.name = "on" + str(funcName[0]).upper() + funcName[1:]
 
-            # Store the notification information in a class attribute of ControllerBase
-            ControllerBase.__actionNotifications__[
+            # Store the notification information in a class attribute of Controller
+            Controller.__actionNotifications__[
                 f"{controllerName}.{notify.name}"
             ] = notify.arguments
 
@@ -446,8 +446,8 @@ def Signal(
                 f"Signal definition at {controllerName} is missing output bound variable"
             )
 
-    # Store the signal arguments in a class attribute of ControllerBase
-    ControllerBase.__signalArgsMap__[f"{controllerName}.{signalName}"] = args
+    # Store the signal arguments in a class attribute of Controller
+    Controller.__signalArgsMap__[f"{controllerName}.{signalName}"] = args
 
     # Create a new signal with the Qt types, name, and arguments names
     signal = QtCore.Signal(*arg_types, name=signalName, arguments=arg_names)
@@ -524,8 +524,8 @@ def Property(p_type: type, init_val=None, get_f=None, set_f=None):
         notify=signal,
     )
 
-    # Store the property type and relevant changed signal in a class attribute of ControllerBase
-    ControllerBase.__propsTypes__[f"{controllerName}.{propName}"] = (p_type, signal)
+    # Store the property type and relevant changed signal in a class attribute of Controller
+    Controller.__propsTypes__[f"{controllerName}.{propName}"] = (p_type, signal)
 
     # Return the property and signal objects
     return prop

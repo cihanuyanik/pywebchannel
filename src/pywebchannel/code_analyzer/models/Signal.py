@@ -1,5 +1,5 @@
-from src.pywebchannel.code_analyzer.models.Parameter import Parameter
-from src.pywebchannel.code_analyzer.models.Return import Return
+from pywebchannel.code_analyzer.models.Parameter import Parameter
+from pywebchannel.code_analyzer.models.Return import Return
 
 
 class Signal:
