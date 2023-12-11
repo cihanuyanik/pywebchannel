@@ -23,7 +23,6 @@ Python files you would like watch for auto-instant conversion.
 
 `pywebchannel` provides helpful classes, functions and decorators to generate proper controller classes which can be
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
-----------------------------------------------------------------
 
 ## Usage Setup ⚙️:
 
@@ -35,14 +34,12 @@ time communication and exposes objects through web socket(s). The `properties`, 
 immediately become available to the UI with complete signature and type checking through type-script interfaces. Don't
 worry about complicated processes for managing sockets, it is not your responsibility. This is handled automatically,
 you can simply focus on your project.
-----------------------------------------------------------------
 
 ### Definition 2: User Interface / A web project / Frontend 💻
 
 Similarly, it is just a regular web project, which exploit the available modern UI tools. There is no limitation
 such as magically manipulated `window` interfaces or any complicated middle-ware translator which limits the
 functionality web library of yours.
-----------------------------------------------------------------
 
 - `Step 1`: Create a meaningful directory structure. It is completely up to you. But having a meaningful directory
   structure could make things simpler. For that purpose suggested way is to create a root directory with your `AppName`
