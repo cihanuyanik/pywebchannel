@@ -6,6 +6,8 @@ from PySide6 import QtCore
 from PySide6.QtCore import QObject, Slot
 from pydantic import BaseModel
 
+from pywebchannel.code_analyzer.utils.Logger import Logger
+
 
 class Controller(QObject):
     """A base class for controllers that provides common functionality.
@@ -107,9 +109,9 @@ class Response(BaseModel):
             a tuple, a string, a number, etc. Pydantic will not perform any validation or conversion on this field.
     """
 
-    success: Optional[str]
-    error: Optional[str]
-    data: Any
+    success: Optional[str] = None
+    error: Optional[str] = None
+    data: Optional[Any] = None
 
 
 class Helper:
@@ -256,7 +258,7 @@ class Convert:
             return arg
 
         if Type.is_pydantic(type(arg)):
-            return arg.dict()
+            return arg.model_dump()
 
         return arg
 
@@ -271,12 +273,12 @@ class Convert:
             - Other types are wrapped in a Response object with data attribute.
         """
         if isinstance(result, str):
-            return Response(success=result).dict()
+            return Response(success=result).model_dump()
 
         if isinstance(result, Response):
-            return result.dict()
+            return result.model_dump()
 
-        return Response(data=result).dict()
+        return Response(data=result).model_dump()
 
 
 class EmitBy:
@@ -381,9 +383,9 @@ def Action(notify: Notify = None):
 
             # Handle any exceptions
             except Exception as e:
-
+                Logger.error(str(e))
                 # Return a response with the error message
-                return Response(error=str(e)).dict()
+                return Response(error=str(e)).model_dump()
 
         # If a notification signal is specified
         if notify is not None:
