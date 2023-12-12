@@ -13,7 +13,7 @@ sys.path.insert(0, '../src')
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'PyWebChannel'
+project = 'Python Web Channel 🚀'
 copyright = '2023, Cihan Uyanik'
 author = 'Cihan Uyanik'
 email = 'cihanuyanik34@gmail.com'

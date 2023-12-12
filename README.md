@@ -11,6 +11,8 @@ With `pywebchannel`, you can:
 - Enjoy the benefits of TypeScript, such as type safety, code completion, and error detection.
 - Save time and effort by automatically generating TypeScript interfaces from your Python code.
 
+[Documentation & API](https://pywebchannel.readthedocs.io)
+
 ## Type-Script Generator ⚙️
 
 The TypeScript Generator part of this library has a file watcher that translates Python code to TypeScript interfaces.
