@@ -55,7 +55,7 @@ f.close()
 userN = env[0].split("=")[1].strip()
 passW = env[1].split("=")[1].strip()
 
-# Upload to PyPI by feeding user name and password to twine from .env file
+# Upload to PyPI by feeding username and password to twine from .env file
 os.system("python -m twine upload --username " + userN + " --password " + passW + " dist/*")
 
 print("Successfully published version " + new_project_version + " to PyPI")
