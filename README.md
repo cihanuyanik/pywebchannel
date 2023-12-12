@@ -263,7 +263,7 @@ enable this in your project just import it through your `index.html` at the `hea
 
 ```html
 
-<script type="text/javascript" src="src/qwebchannel"></script>
+<script type="text/javascript" src="src/api/qwebchannel"></script>
 ```
 
 ----------------------------------------------------------------
@@ -392,6 +392,9 @@ button?.addEventListener('click', async () => {
 })
 ```
 
+Refresh your web page, and click the button. You should see an alert message saying
+`Hello from 'HelloWorldController.sayHello' to my friend <your input value>`
+
 ----------------------------------------------------------------
 
 ### `Step 13`: Type hinting
@@ -404,7 +407,11 @@ this moment.
 
 - `Step 2:` Check the folder paths written in `ts_generator.py` script
 
-- `Step 3:` Run it.
+- `Step 3:` Run it in separate terminal.
+
+```
+python ts_generator.py
+```
 
 - `Step 4:` You will see that the controller folder will be populated with an auto generated Type-script
   interface, `api/controllers/HelloWorldController.ts`
