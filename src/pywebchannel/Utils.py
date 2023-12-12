@@ -461,7 +461,7 @@ class Logger:
         print(f"\r{Fore.RED}[ERROR] - {sender}: {message}{Fore.RESET}")
 
     @staticmethod
-    def status(message, override=True) -> None:
+    def status(message, sender="", override=True) -> None:
         """
         Log a status message with blue color and optional override flag.
 
@@ -475,9 +475,9 @@ class Logger:
         # Check if the override flag is True
         if override:
             # Write the message with blue color for the level and the message to the standard output
-            sys.stdout.write(f"\r{Fore.BLUE}[STATUS]: {message}{Fore.RESET}")
+            sys.stdout.write(f"\r{Fore.BLUE}[STATUS] - {sender}: {message}{Fore.RESET}")
             # Flush the standard output
             sys.stdout.flush()
         else:
             # Print the message with blue color for the level and the message
-            print(f"\r{Fore.BLUE}[STATUS]: {message}{Fore.RESET}")
+            print(f"\r{Fore.BLUE}[STATUS] - {sender}: {message}{Fore.RESET}")

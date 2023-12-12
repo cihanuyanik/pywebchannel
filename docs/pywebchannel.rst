@@ -33,6 +33,14 @@ Utils
    :undoc-members:
    :show-inheritance:
 
+HttpServer
+-------------------------
+
+.. automodule:: pywebchannel.HttpServer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 WebChannelService
 -------------------------------------
 
@@ -41,10 +49,4 @@ WebChannelService
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: pywebchannel
-   :members:
-   :undoc-members:
-   :show-inheritance:
