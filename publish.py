@@ -17,7 +17,7 @@ if float(new_project_version) <= float(current_project_version):
 pyproject["project"]["version"] = new_project_version
 
 # Write the new version into pyproject.toml
-f = open('pyproject2.toml', 'w')
+f = open('pyproject.toml', 'w')
 toml.dump(pyproject, f)
 f.close()
 
@@ -32,7 +32,7 @@ for i in range(len(conf)):
     elif conf[i].startswith("release"):
         conf[i] = "release = '" + new_project_version + "'\n"
 
-f = open('docs/conf2.py', 'w')
+f = open('docs/conf.py', 'w')
 f.writelines(conf)
 f.close()
 
@@ -46,3 +46,8 @@ os.system("python -m build")
 os.system("git add .")
 os.system("git commit -m \"Publish version " + new_project_version + "\"")
 os.system("git push")
+
+# Upload to PyPI
+os.system("python -m twine upload dist/*")
+
+print("Successfully published version " + new_project_version + " to PyPI")
