@@ -17,8 +17,8 @@ project = 'Python Web Channel 🚀'
 copyright = '2023, Cihan Uyanik'
 author = 'Cihan Uyanik'
 email = 'cihanuyanik34@gmail.com'
-version = '1.1'
-release = '1.1'
+version = '1.4'
+release = '1.4'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

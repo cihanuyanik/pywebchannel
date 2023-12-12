@@ -5,7 +5,7 @@ import os
 import sys
 from typing import Optional, List, Dict
 
-from PySide6.QtCore import QObject, QFileSystemWatcher, QDir, QFileInfo
+from PySide6.QtCore import QObject, QFileSystemWatcher, QDir, QFileInfo, Slot
 
 from pywebchannel.CodeAnalyzer import Interface, CodeAnalyzer
 from pywebchannel.Utils import Logger, Utils, Generator
@@ -32,6 +32,7 @@ class GeneratorWatcher(QFileSystemWatcher):
         # Initialize the watchTargetDirMap attribute
         self.watchTargetDirMap: Dict[str, str] = {}
 
+    @Slot(str)
     def onDirectoryChanged(self, dirPath: str):
         """The slot that is triggered when a directory is changed.
 
@@ -54,6 +55,7 @@ class GeneratorWatcher(QFileSystemWatcher):
                 # If not, add the file to the watch list
                 self.addFile(pFile)
 
+    @Slot(str)
     def onFileChanged(self, filePath: str):
         """The slot that is triggered when a file is changed.
 

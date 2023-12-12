@@ -1,3 +1,5 @@
+import {QWebChannel} from "./qwebchannel";
+
 /**
  * An abstract base class for API communication using WebSockets and QWebChannel.
  */

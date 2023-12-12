@@ -1,4 +1,5 @@
 import {BaseAPI} from "./BaseAPI";
+import {QWebChannel} from "./qwebchannel";
 
 /**
  * A subclass of BaseAPI that handles commands for the TodoController.

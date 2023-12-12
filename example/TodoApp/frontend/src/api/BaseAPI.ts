@@ -1,6 +1,10 @@
 /**
  * An abstract base class for API communication using WebSockets and QWebChannel.
  */
+
+import {QWebChannel} from "./qwebchannel";
+
+
 export abstract class BaseAPI {
   // The URL of the backend socket
   protected _backend_socket_url: string;

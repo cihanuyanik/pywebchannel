@@ -258,13 +258,7 @@ and `models` directories as well, for nicely formatted structure.
 
 `api/qwebchannel/index.js` is the official QWebChannel javascript interface. However, it is different than
 the original (`index_org.js`) one. It has been updated to support `async`/`await` pattern instead of old-school
-callback style usage. Addition to that a typescript definition has been attached as well, `index.d.ts`. In order to
-enable this in your project just import it through your `index.html` at the `head` section with `script` tag
-
-```html
-
-<script type="text/javascript" src="src/api/qwebchannel"></script>
-```
+callback style usage. Addition to that a typescript definition has been attached as well, `index.d.ts`.
 
 ----------------------------------------------------------------
 
@@ -298,13 +292,15 @@ Then add connection request into your `main.ts`
 import {API} from "./api/CommandAPI.ts";
 
 // Try to connect
-await API.connect()
+API.connect().then(() => {
+  if (API.isConnected()) {
+    console.log("Successfully connected to backend")
+  }
+}).catch((error) => {
+  console.log(error)
+})
 
-// Inform about connection
-if (API.isConnected()) {
-  console.log("Successfully connected to backend")
-}
-
+// Add a simple UI
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div> 
     <input id="input">
@@ -424,6 +420,74 @@ python ts_generator.py
   function, `sayHello(...)`, the return value `response` all are taking advantage of type-hinting.
 
 ----------------------------------------------------------------
+
+### `The last step`: Finalize your UI and serve it
+
+When you complete your UI, you can serve it inside your `backend` project.
+For that purpose, you have a couple of options as usual.
+
+First of all, you need to build your UI project. Inside your UI project, run:
+
+```
+npm run build
+```
+
+This is going to create a `dist` folder inside your UI project, `frontend/dist`.
+Copy `dist` folder into your `backend` project, and rename it with a meaningful name, such as `app_ui`.
+
+Since it is a `javascript` based web project, opening the html file is not enough. The `javascript` functionalities
+will not be available. For that purpose, you need to serve it through a web server.
+
+You can use the given `HttpServer` class inside `pywebchannel` for that purpose. It is a simple `http` server, which
+serves the given folder. Then you can access your UI through a browser, or even better, you can use `QWebEngineView` to
+display it
+
+Please update your `main.py` file as follows. Feel free to use all the features you deserve from `QWebEngineView`:
+
+```python
+# main.py
+import sys
+
+from PySide6.QtCore import QUrl
+from PySide6.QtWebEngineCore import QWebEngineSettings
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtWidgets import QApplication
+
+from controllers.HelloWorldController import HelloWorldController
+from pywebchannel import WebChannelService, HttpServer
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    # Create a WebChannelService with a desired serviceName and the parent QObject
+    commandTransferService = WebChannelService("Command Transfer Service", app)
+    # Start the service with a desired port number, 9000 in this example
+    commandTransferService.start(9000)
+
+    # Create hello world controller object
+    hwController = HelloWorldController(app)
+    # Register controller for the communication service
+    commandTransferService.registerController(hwController)
+
+    # Create http server and start it
+    UI_PORT = 12000
+    httpServer = HttpServer("app_ui", UI_PORT, app)
+    httpServer.start()
+
+    # Website on QTGui
+    view = QWebEngineView()
+    view.settings().setAttribute(QWebEngineSettings.WebAttribute.PluginsEnabled, True)
+    view.settings().setAttribute(QWebEngineSettings.WebAttribute.DnsPrefetchEnabled, True)
+    view.load(QUrl(f"http://localhost:{UI_PORT}/"))
+    view.setWindowTitle("Hello World App")
+    view.show()
+
+    app.exec()
+```
+
+This will spin a web server at port `12000`, and serve the `app_ui` folder. You can access your UI through
+a browser by typing `http://localhost:12000` into the address bar. This could be helpful, if you observe any weird
+behaviour on your it. The console on the browser could be helpful to debug the problem.
 
 ### 🎊🎈✌️ Congratulations!!! 🎊🎈✌️
 

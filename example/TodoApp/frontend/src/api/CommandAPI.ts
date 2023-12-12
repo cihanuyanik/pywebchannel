@@ -1,4 +1,5 @@
 import { BaseAPI } from "./BaseAPI";
+import { QWebChannel } from "./qwebchannel";
 import { TodoController } from "./controllers/TodoController";
 
 /**

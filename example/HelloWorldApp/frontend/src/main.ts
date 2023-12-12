@@ -1,10 +1,13 @@
 import {API} from "./api/CommandAPI.ts";
 
-await API.connect()
+API.connect().then(() => {
+  if (API.isConnected()) {
+    console.log("Successfully connected to backend")
+  }
+}).catch((error) => {
+  console.log(error)
+})
 
-if (API.isConnected()) {
-  console.log("Successfully connected to backend")
-}
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div> 
@@ -18,7 +21,7 @@ const button = document.querySelector<HTMLButtonElement>('#button');
 button?.addEventListener('click', async () => {
   console.log(input?.value)
   const response = await API.HelloWorldController.sayHello(input?.value)
-  
+
   if (response.error) {
     console.log(response.error)
     return
