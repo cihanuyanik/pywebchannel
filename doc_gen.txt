@@ -8,3 +8,5 @@ Update conf.py
 - Update project information
 - Update extensions
 - Update theme
+
+make.bat html
