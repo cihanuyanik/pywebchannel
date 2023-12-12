@@ -7,11 +7,8 @@ from typing import Optional, List, Dict
 
 from PySide6.QtCore import QObject, QFileSystemWatcher, QDir, QFileInfo
 
-from pywebchannel.code_analyzer.CodeAnalyser import CodeAnalyzer
-from pywebchannel.code_analyzer.models.Interface import Interface
-from pywebchannel.code_analyzer.utils.Generator import Generator
-from pywebchannel.code_analyzer.utils.Logger import Logger
-from pywebchannel.code_analyzer.utils.Utils import Utils
+from pywebchannel.CodeAnalyzer import Interface, CodeAnalyzer
+from pywebchannel.Utils import Logger, Utils, Generator
 
 
 class GeneratorWatcher(QFileSystemWatcher):
@@ -53,7 +50,7 @@ class GeneratorWatcher(QFileSystemWatcher):
             try:
                 # Check if the file is already in the watch list
                 watchFiles.index(pFile)
-            except ValueError as e:
+            except ValueError:
                 # If not, add the file to the watch list
                 self.addFile(pFile)
 
@@ -180,7 +177,8 @@ class GeneratorWatcher(QFileSystemWatcher):
         # Return the list
         return files
 
-    def _getPythonFiles(self, directory: QDir) -> List[str]:
+    @staticmethod
+    def _getPythonFiles(directory: QDir) -> List[str]:
         """A helper method that returns the list of python files in a directory.
 
         Args:
@@ -195,7 +193,7 @@ class GeneratorWatcher(QFileSystemWatcher):
         try:
             pythonFiles.remove("__init__.py")
             pythonFiles.remove("ControllerBase.py")
-        except Exception as e:
+        except ValueError:
             # If failed, ignore the exception
             pass
 
@@ -256,7 +254,8 @@ class GeneratorWatcher(QFileSystemWatcher):
             # Log an info message
             Logger.info(f"Typescript file, {outputFile} has been deleted")
 
-    def __get_members(self, filePath: str):
+    @staticmethod
+    def __get_members(filePath: str):
         """Get the members from the Python file.
 
         Args:
@@ -277,6 +276,7 @@ class GeneratorWatcher(QFileSystemWatcher):
         # Filter them out, only keep the classes from the same file
         members_in_file = []
         for i in range(len(members)):
+            # noinspection PyBroadException
             try:
                 name, member = members[i]
 
@@ -284,7 +284,7 @@ class GeneratorWatcher(QFileSystemWatcher):
                 if member.__module__ == "MODULE_NAME":
                     # Add the member to the list
                     members_in_file.append(members[i])
-            except Exception as e:
+            except Exception:
                 # Ignore any exceptions
                 pass
 

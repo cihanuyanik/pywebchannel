@@ -12,7 +12,7 @@ from PySide6.QtWebChannel import QWebChannel, QWebChannelAbstractTransport
 from PySide6.QtWebSockets import QWebSocket, QWebSocketServer
 
 from pywebchannel.Controller import Controller
-from pywebchannel.code_analyzer.utils.Logger import Logger
+from pywebchannel.Utils import Logger
 
 
 class WebSocketTransport(QWebChannelAbstractTransport):
@@ -45,7 +45,7 @@ class WebSocketTransport(QWebChannelAbstractTransport):
             doc.toJson(QJsonDocument.JsonFormat.Compact).toStdString()
         )
 
-    # Deserialize the stringified JSON messageData and emit messageReceived.
+    # Deserialize the stringifies JSON messageData and emit messageReceived.
     @Slot(str)
     def textMessageReceived(self, messageData: str) -> None:
         error = QJsonParseError()
@@ -104,7 +104,9 @@ class WebChannelService(QObject):
         self.websocketServer = None
         self.port = 0
         self.serviceName = serviceName
+        # noinspection PyTypeChecker
         self.clientWrapper: WebSocketClientWrapper = None
+        # noinspection PyTypeChecker
         self.channel: QWebChannel = None
         self.activeClientCount = 0
 
@@ -163,6 +165,7 @@ class WebChannelService(QObject):
             self.serviceName,
         )
 
+    # noinspection PyUnusedLocal
     @Slot(WebSocketTransport)
     def onClientDisconnected(self, transport: WebSocketTransport) -> None:
         self.activeClientCount = self.activeClientCount - 1

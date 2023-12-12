@@ -1,0 +1,10 @@
+sphinx-apidoc -o docs3 -f --full -a src
+
+Update index.rst
+- Change project name
+
+Update conf.py
+- Check the sys path insert, correct to relative
+- Update project information
+- Update extensions
+- Update theme

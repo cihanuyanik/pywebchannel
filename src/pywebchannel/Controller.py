@@ -6,7 +6,7 @@ from PySide6 import QtCore
 from PySide6.QtCore import QObject, Slot
 from pydantic import BaseModel
 
-from pywebchannel.code_analyzer.utils.Logger import Logger
+from pywebchannel.Utils import Logger
 
 
 class Controller(QObject):
@@ -72,8 +72,10 @@ class Controller(QObject):
         move_from_base_to_cls("__propsTypes__", "propsTypes")
 
         # Create 'Changed' signals of properties
+        # noinspection PyUnresolvedReferences
         for propName, (propType, propChangedSignal) in cls.propsTypes.items():
             setattr(cls, f"{propName}Changed", propChangedSignal)
+            # noinspection PyUnresolvedReferences
             cls.propsTypes[propName] = propType
 
     def name(self) -> str:
@@ -94,24 +96,19 @@ class Controller(QObject):
 
 class Response(BaseModel):
     """A Pydantic model that represents the outcome of some operation.
-
-    Attributes:
-        success: Optional[str]
-            A string that indicates whether the operation was successful or not.
-            It can be None or any string value. For example, "yes", "no", "ok", "error", etc.
-
-        error: Optional[str]
-            A string that provides an error message if something went wrong during the operation.
-            It can be None or any string value. For example, "Invalid input", "Connection timeout", "Database error"etc.
-
-        data:
-            Any Python object that stores the result of the operation. It can be of any type, such as a dict, a list,
-            a tuple, a string, a number, etc. Pydantic will not perform any validation or conversion on this field.
     """
-
+    
     success: Optional[str] = None
+    """A string that indicates whether the operation was successful or not. It can be None or any string value. For 
+    example, "yes", "no", "ok", "error", etc."""
+
     error: Optional[str] = None
+    """A string that provides an error message if something went wrong during the operation. It can be None or any 
+    string value. For example, "Invalid input", "Connection timeout", "Database error"etc."""
+
     data: Optional[Any] = None
+    """Any Python object that stores the result of the operation. It can be of any type, such as a dict, a list, 
+    a tuple, a string, a number, etc. Pydantic will not perform any validation or conversion on this field."""
 
 
 class Helper:
@@ -152,9 +149,6 @@ class Type:
     """
     This class provides some utility methods to check the type of variable.
 
-    Attributes:
-        primitives: A tuple of primitive types in Python, such as bool, str, int, float, and NoneType.
-
     Methods:
         is_primitive(var_type: type) -> bool:
             Returns True if the given type is a primitive type, False otherwise.
@@ -167,6 +161,9 @@ class Type:
     """
 
     primitives = (bool, str, int, float, type(None))
+    """
+    A tuple of primitive types in Python, such as bool, str, int, float, and NoneType.
+    """
 
     @staticmethod
     def is_primitive(var_type: type):
@@ -188,14 +185,14 @@ class Convert:
 
     @staticmethod
     def from_py_to_qt(argDict: Dict[str, type]) -> Tuple[List[str], List[type]]:
-        """
-        Converts a dictionary of argument names and types from Python to Qt format.
-        Returns a tuple of two lists: one for the argument names and one for the argument types.
-        The argument types are converted as follows:
+        """Converts a dictionary of argument names and types from Python to Qt format.
             - Primitive types are kept as they are.
             - List types are converted to list type.
             - Pydantic types are converted to dict type.
             - Other types are converted to dict type.
+
+        Returns:
+            Tuple[List[str], List[type]] - argument names and argument types.
         """
         arg_names = []
         arg_types = []
@@ -217,10 +214,9 @@ class Convert:
 
     @staticmethod
     def from_web_to_py(arg, paramType) -> Any:
-        """
-        Converts a web format argument to a Python format argument according to the given parameter type.
-        Returns the converted argument.
-        The argument types are converted as follows:
+        """Converts a web format argument to a Python format argument according to the given parameter type.
+
+        Returns:
             - Primitive types are kept as they are.
             - List types are recursively converted using the inner type.
             - Pydantic types are instantiated using the argument as a keyword dictionary.
@@ -240,10 +236,9 @@ class Convert:
 
     @staticmethod
     def from_py_to_web(arg) -> Any:
-        """
-        Converts a Python format argument to a web format argument.
-        Returns the converted argument.
-        The argument types are converted as follows:
+        """Converts a Python format argument to a web format argument.
+
+        Returns:
             - Primitive types are kept as they are.
             - List types are recursively converted using the inner type.
             - Pydantic types are converted to a dictionary using the dict() method.
@@ -264,13 +259,13 @@ class Convert:
 
     @staticmethod
     def from_py_to_web_response(result) -> Dict[str, Any]:
-        """
-        Converts a Python format result to a web format response.
-        Returns a dictionary that represents the response.
-        The result types are converted as follows:
+        """Converts a Python format result to a web format response.
             - String types are wrapped in a Response object with success attribute.
             - Response types are converted to a dictionary using the dict() method.
             - Other types are wrapped in a Response object with data attribute.
+
+        Returns:
+             Dict[str, Any] - a dictionary that represents the response.
         """
         if isinstance(result, str):
             return Response(success=result).model_dump()
@@ -282,12 +277,7 @@ class Convert:
 
 
 class EmitBy:
-    """A class to represent the source of a notification.
-
-    Attributes:
-        Auto (int): A constant value of 0 to indicate that the notification is emitted automatically by the system.
-        User (int): A constant value of 1 to indicate that the notification is emitted manually by the user.
-    """
+    """A class to represent the source of a notification."""
 
     Auto = 0
     User = 1
@@ -302,9 +292,6 @@ class Notify:
         name as the key and the argument type as the value.
         emitBy (EmitBy): The source of the notification, either EmitBy.Auto or EmitBy.User.
         The default value is EmitBy.Auto.
-
-    Methods: __init__(self, name: str, arguments: Dict[str, type], emitBy: EmitBy = EmitBy.Auto):
-    The constructor method for the class.
     """
 
     def __init__(
@@ -517,6 +504,7 @@ def Property(p_type: type, init_val=None, get_f=None, set_f=None):
 
     # Create property
     # Create a Qt property object with the Qt type, the getter and setter functions, and the signal
+    # noinspection PyTypeChecker
     prop = QtCore.Property(
         prop_type_adjusted[0],
         # Use the custom getter function if given, otherwise use the default one

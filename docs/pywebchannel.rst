@@ -1,18 +1,15 @@
-pywebchannel package
-====================
+API
+===
 
-Subpackages
------------
+CodeAnalyzer
+--------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: pywebchannel.CodeAnalyzer
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   pywebchannel.code_analyzer
-
-Submodules
-----------
-
-pywebchannel.Controller module
+Controller
 ------------------------------
 
 .. automodule:: pywebchannel.Controller
@@ -20,7 +17,7 @@ pywebchannel.Controller module
    :undoc-members:
    :show-inheritance:
 
-pywebchannel.GeneratorWatcher module
+GeneratorWatcher
 ------------------------------------
 
 .. automodule:: pywebchannel.GeneratorWatcher
@@ -28,7 +25,15 @@ pywebchannel.GeneratorWatcher module
    :undoc-members:
    :show-inheritance:
 
-pywebchannel.WebChannelService module
+Utils
+-------------------------
+
+.. automodule:: pywebchannel.Utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+WebChannelService
 -------------------------------------
 
 .. automodule:: pywebchannel.WebChannelService

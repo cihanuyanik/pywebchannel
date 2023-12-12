@@ -1,14 +1,15 @@
 import inspect
 import pprint
+import sys
+from datetime import datetime
 from inspect import signature
+
+import colorama
+from colorama import Fore, Back
 
 
 class Utils:
     """A class that provides some utility methods for working with types and signatures.
-
-    Attributes:
-        VARIABLE_TYPE_MAP: A class attribute that maps Python types to TypeScript types.
-        pp: A class attribute that creates a pretty printer object for formatting output.
     """
 
     # Define a dictionary that maps Python types to TypeScript types
@@ -45,8 +46,8 @@ class Utils:
         Args:
             T: A type object that represents the subclass.
 
-        Returns:
-            A dictionary that maps the names of the base classes to their type objects, starting from the subclass to the object class.
+        Returns: A dictionary that maps the names of the base classes to their type objects, starting from the
+        subclass to the object class.
         """
 
         def inner(t: type, output: dict):
@@ -96,7 +97,7 @@ class Utils:
 
     @staticmethod
     def simplyVariableType(text: str) -> str:
-        """Simplifies a string representation of a type by removing whitespace, quotation marks, and package information.
+        """Simplifies a str representation of a type by removing whitespace, quotation marks, and package information.
 
         Args:
             text: A string that represents the type to be simplified.
@@ -104,7 +105,7 @@ class Utils:
         Returns:
             A simplified string that represents the type, with the format 'list[<type>]' for list types.
         """
-        # Clear white space and unnecesary quation symbols
+        # Clear white space and unnecessary symbols
         text = text.strip(" '")
 
         # Check if the type is a list type and get the prefix
@@ -132,16 +133,18 @@ class Utils:
             text: A string that represents the type to be checked.
 
         Returns:
-            A tuple of a boolean value and a string prefix. The boolean value is True if the type is a list type, and False otherwise. The string prefix is either 'list[' or 'List[' depending on the case of the type, or an empty string if the type is not a list type.
+            A tuple of a boolean value and a string prefix. The boolean value is True if the type is a list
+            type, and False otherwise. The string prefix is either list[ or List[ depending on the case of the type,
+            or an empty string if the type is not a list type.
         """
-        # If the type starts with 'list['
+        # If the type starts with list[
         if text.startswith("list["):
-            # Return True and the prefix 'list['
+            # Return True and the prefix list[
             return True, "list["
 
-        # If the type starts with 'List['
+        # If the type starts with List[
         if text.startswith("List["):
-            # Return True and the prefix 'List['
+            # Return True and the prefix List[
             return True, "List["
 
         # If the type does not start with either prefix
@@ -213,7 +216,9 @@ class Utils:
             """Parses the return type from the signature split list.
 
             Args:
-                sigSplitList (list of str): The list of strings obtained by splitting the signature string by the arrow symbol.
+                sigSplitList (list of str):
+                    The list of strings obtained by splitting the signature string by the
+                    arrow symbol.
 
             Returns:
                 str: The return type of the function, or "Response" if not annotated.
@@ -234,8 +239,10 @@ class Utils:
                 inputPartStr (str): The input part of the signature string, i.e. the part before the arrow symbol.
 
             Returns:
-                paramNames (list of str): The names of the parameters of the function.
-                paramTypes (list of str): The types of the parameters of the function, or empty strings if not annotated.
+                paramNames (list of str)
+                    The names of the parameters of the function.
+                paramTypes (list of str)
+                    The types of the parameters of the function, or empty strings if not annotated.
             """
 
             # Remove spaces from the input part
@@ -253,24 +260,24 @@ class Utils:
             # Remove 'self' from the input parameters
             inputParameters.remove("self")
 
-            paramNames = []
-            paramTypes = []
+            parNames = []
+            parTypes = []
             for parStr in inputParameters:
                 # Get rid of default arguments
                 parStr = parStr.split("=")[0]
 
                 # Split the parameter string by the colon symbol
                 parParts = parStr.split(":")
-                paramNames.append(parParts[0].strip(" '"))
+                parNames.append(parParts[0].strip(" '"))
 
                 # If the parameter has a type annotation, append it to the list
                 if len(parParts) == 2:
-                    paramTypes.append(Utils.simplyVariableType(parParts[1]))
+                    parTypes.append(Utils.simplyVariableType(parParts[1]))
                 else:
                     # No type annotation for the parameter
-                    paramTypes.append("")
+                    parTypes.append("")
 
-            return paramNames, paramTypes
+            return parNames, parTypes
 
         # Parse the return type from the signature split list
         returnType = parseReturnType(sigSplit)
@@ -280,3 +287,197 @@ class Utils:
 
         # Return the parsed names, types, and return type
         return paramNames, paramTypes, returnType
+
+
+class Generator:
+    """
+    A class to generate TypeScript code for interfaces.
+    """
+
+    @staticmethod
+    def header():
+        """
+        Generate the header for the TypeScript file.
+
+        Returns:
+            list: A list of strings that represent the header lines.
+        """
+        # Get the current time as a string without the microseconds part
+        cTime = datetime.now().__str__().split(".")[0]
+        # Create a list of strings for the header lines
+        cLines = [
+            "////////////////////////////////////////////////////",
+            "// Auto generated file",
+            f"// Generation time: {cTime}",
+            "////////////////////////////////////////////////////",
+            "",
+        ]
+        # Return the header lines
+        return cLines
+
+    @staticmethod
+    def imports(deps):
+        """
+        Generate the import statements for the TypeScript file.
+
+        Args:
+            deps (list): A list of strings that represent the dependencies of the interfaces.
+
+        Returns:
+            list: A list of strings that represent the import statements.
+        """
+        # Create an empty list to store the import statements
+        cLines = []
+        # Loop through the dependencies list
+        for dep in deps:
+            # Append an import statement for each dependency to the list
+            cLines.append(f'import {{ {dep} }} from "../models/{dep}";')
+
+        # Append an empty line to the list
+        cLines.append("")
+
+        # Return the import statements
+        return cLines
+
+    @staticmethod
+    def interface(name: str, interface):
+        """
+        Generate the interface declaration for the TypeScript file.
+
+        Args:
+            name (str): The name of the interface.
+            interface (Interface): An Interface object that represents the interface.
+
+        Returns:
+            list: A list of strings that represent the interface declaration.
+        """
+        # Create an empty list to store the interface declaration
+        # Append a comment for the interface name to the list
+        # Append the interface declaration start to the list
+        cLines = [f"// {name} interface",
+                  f"export interface {name} {{"]
+
+        # Check if the interface has any properties
+        if len(interface.props) > 0:
+            # Append a comment for the properties section to the list
+            cLines.append("  // Properties")
+            # Loop through the properties list
+            for prop in interface.props:
+                # Append each property declaration to the list
+                cLines.append(f"  {prop}")
+            # Append an empty line to the list
+            cLines.append("")
+
+        # Check if the interface has any signals
+        if len(interface.signals) > 0:
+            # Append a comment for the signals section to the list
+            cLines.append("  // Signals")
+            # Loop through the signals list
+            for signal in interface.signals:
+                # Append each signal declaration to the list
+                cLines.append(f"  {signal}")
+            # Append an empty line to the list
+            cLines.append("")
+
+        # Check if the interface has any slots
+        if len(interface.slots) > 0:
+            # Append a comment for the slots section to the list
+            cLines.append("  // Slots")
+            # Loop through the slots list
+            for slot in interface.slots:
+                # Append each slot declaration to the list
+                cLines.append(f"  {slot}")
+            # Append an empty line to the list
+            cLines.append("")
+
+        # Remove the last empty line from the list
+        cLines.pop(len(cLines) - 1)
+        # Append the interface declaration end to the list
+        cLines.append(f"}}")
+        # Append an empty line to the list
+        cLines.append(f"")
+
+        # Return the interface declaration
+        return cLines
+
+
+class Logger:
+    """
+    A class to log messages with different colors and levels.
+    """
+
+    def __init__(self) -> None:
+        """
+        Initialize a Logger object.
+        """
+        # Call the init method of the colorama module
+        colorama.init(autoreset=True)
+
+    @staticmethod
+    def info(message, sender="") -> None:
+        """
+        Log an info message with green color and optional sender name.
+
+        Args:
+            message (str): The message to log.
+            sender (str): The name of the sender of the message. Default to "".
+
+        Returns:
+            None
+        """
+        # Print the message with green color for the level, cyan color for the sender, and reset color for the message
+        print(
+            f"\r{Fore.GREEN}[INFO] - {Back.CYAN}{sender}{Back.RESET}: {message}{Fore.RESET}"
+        )
+
+    @staticmethod
+    def warning(message, sender="") -> None:
+        """
+        Log a warning message with yellow color and optional sender name.
+
+        Args:
+            message (str): The message to log.
+            sender (str): The name of the sender of the message. Default to "".
+
+        Returns:
+            None
+        """
+        # Print the message with yellow color for the level and the message, and reset color for the sender
+        print(f"\r{Fore.YELLOW}[WARNING] - {sender}: {message}{Fore.RESET}")
+
+    @staticmethod
+    def error(message, sender="") -> None:
+        """
+        Log an error message with red color and optional sender name.
+
+        Args:
+            message (str): The message to log.
+            sender (str): The name of the sender of the message. Default to "".
+
+        Returns:
+            None
+        """
+        # Print the message with red color for the level and the message, and reset color for the sender
+        print(f"\r{Fore.RED}[ERROR] - {sender}: {message}{Fore.RESET}")
+
+    @staticmethod
+    def status(message, override=True) -> None:
+        """
+        Log a status message with blue color and optional override flag.
+
+        Args:
+            message (str): The message to log.
+            override (bool): A flag to indicate whether to override the previous status message or not. Default to True.
+
+        Returns:
+            None
+        """
+        # Check if the override flag is True
+        if override:
+            # Write the message with blue color for the level and the message to the standard output
+            sys.stdout.write(f"\r{Fore.BLUE}[STATUS]: {message}{Fore.RESET}")
+            # Flush the standard output
+            sys.stdout.flush()
+        else:
+            # Print the message with blue color for the level and the message
+            print(f"\r{Fore.BLUE}[STATUS]: {message}{Fore.RESET}")
