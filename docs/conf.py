@@ -16,7 +16,7 @@ sys.path.insert(0, '../src')
 project = 'PyWebChannel'
 copyright = '2023, Cihan Uyanik'
 author = 'Cihan Uyanik'
-email = 'ciuya@dtu.dk'
+email = 'cihanuyanik34@gmail.com'
 version = '1.1'
 release = '1.1'
 
