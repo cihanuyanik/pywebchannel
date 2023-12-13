@@ -1,14 +1,6 @@
 API 📃
 ======
 
-CodeAnalyzer
---------------------------------
-
-.. automodule:: pywebchannel.CodeAnalyzer
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Controller
 ------------------------------
 
@@ -25,10 +17,10 @@ GeneratorWatcher
    :undoc-members:
    :show-inheritance:
 
-Utils
--------------------------
+WebChannelService
+-------------------------------------
 
-.. automodule:: pywebchannel.Utils
+.. automodule:: pywebchannel.WebChannelService
    :members:
    :undoc-members:
    :show-inheritance:
@@ -41,12 +33,25 @@ HttpServer
    :undoc-members:
    :show-inheritance:
 
-WebChannelService
--------------------------------------
+CodeAnalyzer
+--------------------------------
 
-.. automodule:: pywebchannel.WebChannelService
+.. automodule:: pywebchannel.CodeAnalyzer
    :members:
    :undoc-members:
    :show-inheritance:
+
+
+Utils
+-------------------------
+
+.. automodule:: pywebchannel.Utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+
+
 
 
