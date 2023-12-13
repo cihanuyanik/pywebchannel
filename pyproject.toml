@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pywebchannel"
-version = "1.6"
+version = "1.7"
 description = "This repository generates auto typescript files for QWebChannel python local backend. It enables you to build a stunning UI for your python project with web technologies."
 readme = "README.md"
 requires-python = ">=3.8"
