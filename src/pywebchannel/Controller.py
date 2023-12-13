@@ -320,14 +320,17 @@ def Action(notify: Notify = None):
     """
     A decorator that converts a Python function into a Qt slot. The notify argument is used to emit after the function
     is executed. Defaults to None. If it is specified, a signal with the given name will be created and attached
-    into the class. You don't need to create that signal yourself
+    into the class. You don't need to create that signal yourself. The signal will be emitted with the result of the
+    function. EmitBy is used to specify the source of the notification. If it is set to EmitBy.Auto, the notification
+    will be emitted automatically after the function is executed. If it is set to EmitBy.User, the notification will
+    be emitted only if the function explicitly emits it.
 
     Args:
         notify (Notify, optional): A Notify object that specifies the name and arguments of a notification signal
 
     Returns:
         A wrapper function that is a Qt slot with the same arguments and return type as the original function.
-        The slot also handles serialization and deserialization of inputs and outputs, and optionally
+        The slot also handles serialization and deserialization of inputs and outputs, exception handling,and optionally
         emits a notification signal with the result.
 
     References:
@@ -404,7 +407,7 @@ def Signal(
         args: Dict[str, type] | List[type],
         controllerName: str = None,
         signalName: str = None,
-):
+) -> QtCore.Signal:
     """
     A function that creates a Qt signal with the given arguments by making necessary type conversions to keep Qt
     and serialization process happy.
