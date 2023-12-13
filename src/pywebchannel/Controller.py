@@ -97,7 +97,7 @@ class Controller(QObject):
 class Response(BaseModel):
     """A Pydantic model that represents the outcome of some operation.
     """
-    
+
     success: Optional[str] = None
     """A string that indicates whether the operation was successful or not. It can be None or any string value. For 
     example, "yes", "no", "ok", "error", etc."""
@@ -329,6 +329,12 @@ def Action(notify: Notify = None):
         A wrapper function that is a Qt slot with the same arguments and return type as the original function.
         The slot also handles serialization and deserialization of inputs and outputs, and optionally
         emits a notification signal with the result.
+
+    References:
+        https://doc.qt.io/qtforpython-6/tutorials/basictutorial/signals_and_slots.html
+
+    See Also:
+        Signal, Property
     """
 
     # The decorator function takes the function to be wrapped as an argument
@@ -399,7 +405,9 @@ def Signal(
         controllerName: str = None,
         signalName: str = None,
 ):
-    """A function that creates a Qt signal with the given arguments.
+    """
+    A function that creates a Qt signal with the given arguments by making necessary type conversions to keep Qt
+    and serialization process happy.
 
     Args:
         args (Dict[str, type] or List[type]): A dictionary that maps the names and types of the signal arguments.
@@ -407,11 +415,20 @@ def Signal(
         signalName (str, optional): The name of the signal. Defaults to None.
 
     Returns:
-        A Qt signal object with the specified arguments, name, and arguments names.
+        A QtCore.Signal object with the specified arguments, name, and arguments names.
+
 
     Raises:
-        Exception: If the controller name or signal name cannot be inferred from the caller information, or if the
-        signal name is empty.
+        Exception: If the controller name or signal name cannot be inferred from the caller information,
+            or if the signal name is empty.
+
+    References:
+        https://doc.qt.io/qtforpython-6/PySide6/QtCore/Signal.html
+
+    See Also:
+        Property, Action
+
+
     """
 
     # Convert type list into map
@@ -445,9 +462,10 @@ def Signal(
     return signal
 
 
-# Define a function that creates a Qt property and a corresponding signal
-def Property(p_type: type, init_val=None, get_f=None, set_f=None):
-    """A function that creates a Qt property and a corresponding signal.
+def Property(p_type: type, init_val=None, get_f=None, set_f=None) -> QtCore.Property:
+    """
+    A function that creates a Qt property and a corresponding signal. The function is responsible for creating
+    the backend variable, getter and setter functions, and the signal object related with the property.
 
     Args:
         p_type (type): The type of the property value.
@@ -456,10 +474,16 @@ def Property(p_type: type, init_val=None, get_f=None, set_f=None):
         set_f (function, optional): A custom setter function for the property. Defaults to None.
 
     Returns:
-        The prop which is a Qt property object
+        The prop which is a QtCore.Property object.
 
     Raises:
         Exception: If the property name cannot be inferred from the caller information
+
+    References:
+        https://doc.qt.io/qtforpython-6/PySide6/QtCore/Property.html
+
+    See Also:
+        Signal, Action
     """
 
     # Get call stack and infer:
