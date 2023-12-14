@@ -56,7 +56,7 @@ for i, contentItem in enumerate(contentElements):
 
     # cover content with details html tag
     contentLines.insert(0, f"<details{' open' if i == 0 else ''}>\n")
-    contentLines.append("</details>\n")
+    contentLines.append("</details>")
 
     # write to README2.md
     fReadMe.writelines(contentLines)

@@ -27,8 +27,7 @@ Python files you would like watch for auto-instant conversion.
 `pywebchannel` provides helpful classes, functions and decorators to generate proper controller classes which can be
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
 
-[Documentation & API](https://pywebchannel.readthedocs.io)</details>
-<details>
+[Documentation & API](https://pywebchannel.readthedocs.io)</details><details>
 <summary><h1>Why do you need this? 🤔</h1></summary>
 
 You want to create a professional UI with modern web technologies and python. But you face many challenges with the
@@ -294,8 +293,7 @@ your model classes, which is the usual case for model classes in any project. Th
 
 Please check the API documentation and [example projects](https://github.com/cihanuyanik/pywebchannel/tree/main/example)
 for more details.
- </details>
-<details>
+ </details><details>
 <summary><h1>Installation 🔃</h1></summary>
 
 You can simply install the package using pip:
@@ -312,8 +310,7 @@ Requirements:
 - [pydantic](https://docs.pydantic.dev/latest/) - Model definition and validation
 - [colorama](https://pypi.org/project/colorama/) - Colored terminal output
 
-</details>
-<details>
+</details><details>
 <summary><h1>Usage Setup ⚙️:</h1></summary>
 
 ## Definition 1: Business Logic / A python project / Backend 🐍
@@ -775,8 +772,7 @@ if __name__ == "__main__":
 
 This will spin a web server at port `12000`, and serve the `app_ui` folder. You can access your UI through
 a browser by typing `http://localhost:12000` into the address bar. This could be helpful, if you observe any weird
-behaviour on your it. The console on the browser could be helpful to debug the problem.</details>
-<details>
+behaviour on your it. The console on the browser could be helpful to debug the problem.</details><details>
 <summary><h1>Congratulations!!! ✌️🎈🎊</h1></summary>
 
 You've successfully linked your Python backend to the frontend, introducing a tool capable of dynamically generating
@@ -803,8 +799,7 @@ Consider the following steps as you continue to enhance your development process
 
 - Enhance accessibility by creating a user interface for the tool, catering to developers who may prefer graphical
   interfaces over command-line tools.
-- Implement features like configurable options and settings to further customize the tool's behavior.</details>
-<details>
+- Implement features like configurable options and settings to further customize the tool's behavior.</details><details>
 <summary><h1>How to Contribute 🙌</h1></summary>
 
 If you want to contribute to this project, you are more than welcome. Here are some ways you can help:
@@ -812,13 +807,11 @@ If you want to contribute to this project, you are more than welcome. Here are s
 - Report any bugs or issues you find.
 - Suggest new features or improvements.
 - Submit pull requests with your code changes.
-- Share your feedback or suggestions.</details>
-<details>
+- Share your feedback or suggestions.</details><details>
 <summary><h1>License 📄</h1></summary>
 
 This project is licensed under the MIT License. See
-the [LICENSE](https://github.com/cihanuyanik/pywebchannel/blob/main/LICENSE) file for details.</details>
-<details>
+the [LICENSE](https://github.com/cihanuyanik/pywebchannel/blob/main/LICENSE) file for details.</details><details>
 <summary><h1>Credits 🙏</h1></summary>
 
 This project was inspired by the following sources:
