@@ -1,8 +1,3 @@
-import os
-import re
-import sys
-import shutil
-
 # Load docs/index.rst
 f = open('docs/index.rst', 'r', encoding="utf8")
 indexLines = f.readlines()
