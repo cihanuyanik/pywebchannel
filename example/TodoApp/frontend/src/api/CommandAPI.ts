@@ -1,6 +1,6 @@
-import { BaseAPI } from "./BaseAPI";
-import { QWebChannel } from "./qwebchannel";
-import { TodoController } from "./controllers/TodoController";
+import {BaseAPI} from "./BaseAPI";
+import {QWebChannel} from "./qwebchannel";
+import {TodoController} from "./controllers/TodoController";
 
 /**
  * A subclass of BaseAPI that handles commands for the TodoController.
@@ -24,7 +24,7 @@ export class CommandAPI extends BaseAPI {
    */
   async onChannelReady(channel: QWebChannel): Promise<void> {
     // Assign the TodoController object from the channel to the instance attribute
-    this.TodoController = this.channel.objects.TodoController;
+    this.TodoController = channel.objects.TodoController;
   }
 }
 

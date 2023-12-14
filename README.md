@@ -26,6 +26,9 @@ Python files you would like watch for auto-instant conversion.
 `pywebchannel` provides helpful classes, functions and decorators to generate proper controller classes which can be
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
 
+```{include} docs/what_is_it.md
+```
+
 ## Usage Setup ⚙️:
 
 ### Definition 1: Business Logic / A python project / Backend 🐍
