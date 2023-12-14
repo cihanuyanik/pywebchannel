@@ -27,7 +27,7 @@ Python files you would like watch for auto-instant conversion.
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
 
 <details>
-  <summary style="list-style-type: none"><h1>What is Python Web Channel❓</h1></summary>
+  <summary style="list-style-type: none; !important;"><h1>What is Python Web Channel❓</h1></summary>
 
 ### Heading
 
