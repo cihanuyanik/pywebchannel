@@ -38,8 +38,9 @@ class WebSocketTransport(QWebChannelAbstractTransport):
         self.socket.textMessageReceived.connect(self.textMessageReceived)
         # Connect the disconnected signal of the socket to the onSocketDisconnected slot
         self.socket.disconnected.connect(self.onSocketDisconnected)
-        # Define the disconnected signal with the QWebChannelAbstractTransport type
-        self.disconnected = Signal(QWebChannelAbstractTransport)
+
+    # Define the disconnected signal with the QWebChannelAbstractTransport type
+    disconnected = Signal(QWebChannelAbstractTransport)
 
     def __del__(self) -> None:
         """Deletes the WebSocketTransport object and the socket object."""
@@ -138,10 +139,11 @@ class WebSocketClientWrapper(QObject):
         self.server = server
         # Connect the newConnection signal of the server to the handleNewConnection slot
         self.server.newConnection.connect(self.handleNewConnection)
-        # Define the clientConnected signal with the WebSocketTransport type
-        self.clientConnected = Signal(WebSocketTransport)
-        # Define the clientDisconnected signal with the WebSocketTransport type
-        self.clientDisconnected = Signal(WebSocketTransport)
+
+    # Define the clientConnected signal with the WebSocketTransport type
+    clientConnected = Signal(WebSocketTransport)
+    # Define the clientDisconnected signal with the WebSocketTransport type
+    clientDisconnected = Signal(WebSocketTransport)
 
     @Slot()
     def handleNewConnection(self) -> None:

@@ -78,6 +78,9 @@ class Controller(QObject):
             # noinspection PyUnresolvedReferences
             cls.propsTypes[propName] = propType
 
+        # Call super init_subclass
+        super().__init_subclass__(**kwargs)
+
     def name(self) -> str:
         """Returns the name of the controller.
 
