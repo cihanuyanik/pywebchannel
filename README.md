@@ -26,8 +26,35 @@ Python files you would like watch for auto-instant conversion.
 `pywebchannel` provides helpful classes, functions and decorators to generate proper controller classes which can be
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
 
-```{include} what_is_it.md
-```
+<details>
+  <summary>
+    <h2>
+      Title
+    </h2>
+  </summary>
+  content
+</details>
+
+<details>
+  <summary><h1>What is Python Web Channel❓</h1></summary>
+
+### Heading
+
+1. Foo
+2. Bar
+
+* Baz
+* Qux
+
+### Some Javascript
+
+  ```js
+  function logSomething(something) {
+    console.log('Something', something);
+}
+  ```
+
+</details>
 
 ## Usage Setup ⚙️:
 
