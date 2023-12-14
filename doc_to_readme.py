@@ -34,7 +34,7 @@ for lineIndex in range(lineIndex + 1, len(indexLines)):
     contentElements.append(f"docs/{line}.md")
 
 # Open README2.md file
-fReadMe = open('README2.md', 'w', encoding="utf8")
+fReadMe = open('README.md', 'w', encoding="utf8")
 
 # Load each file one by one
 for i, contentItem in enumerate(contentElements):
