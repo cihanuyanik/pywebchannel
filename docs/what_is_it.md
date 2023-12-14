@@ -1,5 +1,7 @@
 # What is Python Web Channel❓
 
+## Python Web Channel 🚀
+
 `pywebchannel` is a tool that automatically generates TypeScript files for QWebChannel Python local backend. It
 allows you to create a stunning UI for your Python project using web technologies such as HTML, CSS, and JavaScript.
 
@@ -23,3 +25,5 @@ Python files you would like watch for auto-instant conversion.
 
 `pywebchannel` provides helpful classes, functions and decorators to generate proper controller classes which can be
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
+
+[Documentation & API](https://pywebchannel.readthedocs.io)

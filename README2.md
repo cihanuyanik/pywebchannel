@@ -1,4 +1,7 @@
-# Python Web Channel 🚀
+<details open>
+<summary><h1>What is Python Web Channel❓</h1></summary>
+
+## Python Web Channel 🚀
 
 `pywebchannel` is a tool that automatically generates TypeScript files for QWebChannel Python local backend. It
 allows you to create a stunning UI for your Python project using web technologies such as HTML, CSS, and JavaScript.
@@ -10,8 +13,6 @@ With `pywebchannel`, you can:
 - Write your frontend UI in any web framework of your choice, such as vanilla JS, React, Solid, Vue, etc.
 - Enjoy the benefits of TypeScript, such as type safety, code completion, and error detection.
 - Save time and effort by automatically generating TypeScript interfaces from your Python code.
-
-[Documentation & API](https://pywebchannel.readthedocs.io)
 
 ## Type-Script Generator ⚙️
 
@@ -26,29 +27,296 @@ Python files you would like watch for auto-instant conversion.
 `pywebchannel` provides helpful classes, functions and decorators to generate proper controller classes which can be
 exposed to a UI written by using web technologies. All given types are self documented and easy to follow.
 
-<details><summary><h1>What is Python Web Channel❓</h1></summary>
+[Documentation & API](https://pywebchannel.readthedocs.io)</details>
+<details>
+<summary><h1>Why do you need this? 🤔</h1></summary>
 
-### Heading
+You want to create a professional UI with modern web technologies and python. But you face many challenges with the
+existing libraries. Some of them rely on `window` manipulation, which is not compatible with most web frameworks. Some
+of them use RestAPI libraries, which add a lot of overhead, complexity and state management issues. Some of them use
+`WebSocket`s only for function calls, without any real-time synchronization features.
 
-1. Foo
-2. Bar
+Among these, `QWebChannel` seems to be the best option, with a lightweight `WebSocket` protocol and features like
+synchronization, function calls and property access. However, it also has its own limitations, mainly related to the Qt
+type system. You cannot use it with non-supported Qt types, without doing complex conversions, manual type adjustments
+and boiler-plate code, just to satisfy Qt. This makes development difficult and error-prone. And even if you manage to
+do that on the python side, you still have to deal with a frontend development cycle, with no type-hinting, no
+auto-completion, no compile time validation etc., which is a nightmare in javascript environment.
 
-* Baz
-* Qux
+But don’t worry, `pywebchannel` library is here to solve your problem 😊.
 
-### Some Javascript
+## Let's investigate the problems together
 
-  ```js
-  function logSomething(something) {
-    console.log('Something', something);
-}
-  ```
+Suppose you want to build a `todo application` with python and web technologies. You will require some functionality to
+store the data (list of todos), modify it (add, remove, update), and inform the frontend about the changes.
+
+## Signals 🚦
+
+You want to create a notification mechanism to the frontend, when you add a new todo item. You can use `QtCore.Signals`
+for that.
+
+```python
+# Inside your controller class
+new_todo_added = QtCore.Signal()
+```
+
+This signal can be emitted in your python code, after adding the item to your list. And your frontend will receive it,
+if it is connected to `new_todo_added` signal. But this signal does not carry any information about the new item. How
+can you send some data with it?
+
+```python
+# Inside your controller class
+new_todo_added = QtCore.Signal(str)
+```
+
+This signal can be emitted with a string parameter, and your frontend will receive it. For instance, if your todos have
+an `id` field of type `str`, you can emit it. `str` is a supported type in Qt, so it works. But what if you want to send
+a `Todo` object, which is a custom object of yours that inherits from `pydantic.BaseModel`?
+
+```python
+# Inside your controller class
+new_todo_added = QtCore.Signal(Todo)
+```
+
+This will cause an exception like this:
+
+```text
+TypeError: Signal must be bound to a QObject, not 'Todo'
+```
+
+This is because, `Todo` is not a supported type in Qt. You can use `QtCore.QObject` as a base class for your `Todo`, to
+avoid this error. But then, you will face another problem, which is not even caught by exception mechanism. You will get
+an `empty object` in your frontend, instead of a `Todo` object. This is because Qt does not know how to serialize your
+`Todo` object to a valid json object. The simplest way to make it work is to use `dict` instead of `Todo` object.
+
+```python
+new_todo_added = QtCore.Signal(dict)
+```
+
+But then, you will lose all the type information, and need to do type conversions. I don't even need to mention
+about `list`s. You need to take care of all these details, and keep your frontend and backend in sync. This is too much
+hassle…
+
+You can use pywebchannel library, and define your signal like this:
+
+with a list of types:
+
+```python
+from pywebchannel import Signal
+
+# Inside your controller class
+new_todo_added = Signal([Todo])
+```
+
+or even better, with argument dictionary in the form of `{arg1_name: arg1_type, ...}`:
+
+```python
+from pywebchannel import Signal
+
+# Inside your controller class
+new_todo_added = Signal({'new_todo': Todo})
+```
+
+This will ensure that Qt is happy, and your frontend and backend are in sync.
+
+And this is just the tip of the iceberg 😎.
+
+## Properties 🧲
+
+A property is a way to access and modify an internal (usually private) variable, with a getter and setter, in your
+class. It is a common feature in object-oriented programming. The benefits of using properties in Qt or PySide are that,
+you can create a signal for a property, so that any listeners or connected objects will be updated when the property
+changes.
+
+For example, you have a property that keeps track of the number of todos. I know it is silly, but it is just for
+illustration.
+
+```python
+# Inside your controller class
+todoCount = QtCore.Property(int)
+```
+
+This is how you want to write your code. And also, you want to have a signal, that is triggered when the value of
+todoCount changes, you can call that signal something like `todoCountChanged`.
+
+But that is not possible. You have to define a getter and setter for your property, and also a signal for it.
+
+```python
+# Inside your controller class
+
+def __init__(self):
+    # You need a back variable to hold the value of your property
+    self._todoCount = 0
+
+
+# You need a signal to notify
+todoCountChanged = QtCore.Signal(int, arguments=['todoCount'])
+
+
+# You need a getter
+def get_todoCount(self) -> int:
+    return self._todoCount
+
+
+# You need a setter
+def set_todoCount(self, value: int):
+    if self._todoCount != value:
+        self._todoCount = value
+        self.todoCountChanged.emit(value)
+
+
+# And finally, you can define your property
+todoCount = QtCore.Property(int, fget=get_todoCount, fset=set_todoCount, notify=todoCountChanged)
+```
+
+What the f... is this? 😡
+
+I don’t even want to talk about the type conversions mentioned in `Signals` section. You have to do all these things for
+Properties too.
+
+Instead of this sh..., you can use `pywebchannel` library, and define your property like this:
+
+```python
+from pywebchannel import Property
+
+# Inside your controller class
+todoCount = Property(int, init_val=0)
+```
+
+And that’s it. This will:
+
+- ensure that Qt is happy, and your frontend and backend are in sync.
+- create a private variable called `_todoCount` to store the value of your property.
+- create a getter and setter for you as exactly written above.
+- create a signal called `todoCountChanged`
+-
+
+If you want to have a different implementation for your getter and setter, you can still define one or both of them, and
+pass it as an argument to `Property`.
+
+## Actions 🕹️
+
+Actions are functions that you can call from your frontend. You can create an action in PySide like this:
+
+```python 
+# Inside your controller class
+@QtCore.Slot(str)
+def sayHello(self, name: str):
+    # Do something with todo
+    pass
+```
+
+This works, and you can call this function from your frontend. But the type issues mentioned above are still there.
+
+```python 
+# Inside your controller class
+@QtCore.Slot(Todo)
+def addTodo(self, todo: Todo):
+    # Do something with todo
+    pass
+```
+
+This does not work, and you will not even get an exception about that. Your function will be called with an empty
+argument 😡. Most likely your application will crash, and your frontend will not even know why.
+
+- This is because of one of the input arguments. You have to consider all the input arguments, and make sure that your
+  frontend and backend are in sync.
+- Return values also have the same problem, ‘type matching’ and ‘keeping’ Qt and serialization happy.
+- If you want to notify the frontend about the execution result, you have to create your own signal, and emit it.
+- You also have to handle exceptions as well.
+
+You will end up with a lot of boilerplate code, which is not even related to your business logic.
+
+```python
+# Inside your controller class
+
+# Create a signal for notification
+new_todo_added = QtCore.Signal(dict, arguments=['new_todo'])
+
+
+# Create a slot for your action
+@QtCore.Slot(dict, result=dict)
+def addTodo(self, todo: dict):
+    try:
+        todoObj = Todo.parse_obj(todo)
+
+        # Do something with todo
+
+        self.new_todo_added.emit(todoObj.dict())
+
+        return {'success': True,
+                'error': None,
+                'data': todoObj.dict()}
+    except ParseError as e:
+        return {'success': False,
+                'error': f"Invalid todo object: {e}",
+                'data': None}
+    except Exception as e:
+        return {'success': False,
+                'error': f"Unknown error: {e}",
+                'data': None}
+
+```
+
+This is just a simple example, but you can imagine how it will look like in a real application. And even if you handle
+this by yourself, you will have a frontend development cycle, with no type-hinting, no auto-completion again.
+
+You can use `pywebchannel` library, and create your action like this:
+
+```python
+from pywebchannel import Action, Notify
+
+
+# Inside your controller class
+@Action(Notify([Todo]))
+def addTodo(self, todo: Todo):
+    # Do something with todo    
+    return todo
+```
+
+All the problems mentioned above are solved by `pywebchannel` library’s `@Action` decorator. You can focus on your
+actual project 😎.
+
+## Okay we almost there 🎰
+
+Imagine that you have created your `Signal`s, `Property`s and `Slot`s etc, in your controller class. But your frontend
+still does not recognize your backend types. You have to define all the types in your frontend typescript definition
+files, and keep them updated with your backend types. This is a nightmare, and you will have many bugs, and
+emotional-damages 😭.
+
+Fortunately `pywebchannel` library has a solution for this. You can use pywebchannel library’s `ts_generator` tool. This
+is a simple script that can monitor your python files, and generate typescript definition files automatically. When you
+run it in a separate terminal, it will do its magic, and you will have a wonderful development experience 😍.
+
+To use this tool, you have to inherit your controller class from `pywebchannel.Controller` class, and use `pywebchannel`
+library’s `Signal`, `Property` and `Action` instead of the ones provided by Qt. Also, you have to use `pydantic` for
+your model classes, which is the usual case for model classes in any project. That’s it.
+
+Please check the API documentation and [example projects](https://github.com/cihanuyanik/pywebchannel/tree/main/example)
+for more details.
+ </details>
+<details>
+<summary><h1>Installation 🔃</h1></summary>
+
+You can simply install the package using pip:
+
+```bash
+pip install pywebchannel
+```
+
+All requirements will be installed automatically.
+
+Requirements:
+
+- [PySide6](https://doc.qt.io/qtforpython-6/) - Qt for Python
+- [pydantic](https://docs.pydantic.dev/latest/) - Model definition and validation
+- [colorama](https://pypi.org/project/colorama/) - Colored terminal output
 
 </details>
+<details>
+<summary><h1>Usage Setup ⚙️:</h1></summary>
 
-## Usage Setup ⚙️:
-
-### Definition 1: Business Logic / A python project / Backend 🐍
+## Definition 1: Business Logic / A python project / Backend 🐍
 
 Whatever you call for this step, it is just a regular Qt (PySide6) powered python project, which can take the
 advantage of full power of python with no limitation. To simplify the discussion here, it uses web socket(s) for real
@@ -57,13 +325,13 @@ immediately become available to the UI with complete signature and type checking
 worry about complicated processes for managing sockets, it is not your responsibility. This is handled automatically,
 you can simply focus on your project.
 
-### Definition 2: User Interface / A web project / Frontend 💻
+## Definition 2: User Interface / A web project / Frontend 💻
 
 Similarly, it is just a regular web project, which exploit the available modern UI tools. There is no limitation
 such as magically manipulated `window` interfaces or any complicated middle-ware translator which limits the
 functionality web library of yours.
 
-### `Step 1`: Create a meaningful directory structure.
+## `Step 1`: Create a meaningful directory structure.
 
 It is completely up to you. But having a meaningful directory
 structure could make things simpler. For that purpose suggested way is to create a root directory with your `AppName`
@@ -86,7 +354,7 @@ suggested way for any python project), create one virtual environment, and use i
 
 ----------------------------------------------------------------
 
-### `Step 2`: Install the library `pywebchannel`
+## `Step 2`: Install the library `pywebchannel`
 
 ```
 pip install pywebchannel
@@ -94,7 +362,7 @@ pip install pywebchannel
 
 ----------------------------------------------------------------
 
-### `Step 3`: Create an entry point for your `backend`.
+## `Step 3`: Create an entry point for your `backend`.
 
 Add a main file with any name, i.e. `main.py`, inside
 your `backend` folder. The entry point will contain python `main` function and will create a `QApplication` and run
@@ -127,7 +395,7 @@ if __name__ == "__main__":
 
 ----------------------------------------------------------------
 
-### `Step 4`: Create a python package
+## `Step 4`: Create a python package
 
 To hold classes which contains functionalities to be invoked from `frontend`.
 Typically, it is better to create two packages, one for functionality classes and one for fixed structured objects,
@@ -152,7 +420,7 @@ them `controllers`, `models` respectively.
 
 ----------------------------------------------------------------
 
-### `Step 5`: Create a controller class under your `controllers` package.
+## `Step 5`: Create a controller class under your `controllers` package.
 
 This is going to be one of the Type you are
 going to expose to your UI. Let's call it `HelloWorldController`. And make this class derived
@@ -198,7 +466,7 @@ if __name__ == "__main__":
 
 ----------------------------------------------------------------
 
-### `Step 6:` Add functionality
+## `Step 6:` Add functionality
 
 Technically, at this point our object, `hwController` has been already exposed to the any target UI. The
 functionality and properties of it is already accessible through a websocket located at port number 9000. The problem
@@ -225,7 +493,7 @@ class HelloWorldController(Controller):
 
 ----------------------------------------------------------------
 
-### `Step 7`: Create UI project
+## `Step 7`: Create UI project
 
 Now, we can try to use this inside a web app. For simplicity, inside the `frontend`, just create a `Vite`
 project with `vanilla typescript` template. You can create it yourself easily, or you can take it from `examples`
@@ -233,7 +501,7 @@ folder.
 
 ----------------------------------------------------------------
 
-### `Step 8`: Establish connection
+## `Step 8`: Establish connection
 
 To establish connection between your backend and frontend, it is necessary to open a websocket connection
 from frontend to backend. Luckily, we can use built-in `WebSocket` in our frontend project. First create an `api` folder
@@ -274,7 +542,7 @@ and `models` directories as well, for nicely formatted structure.
 
 ----------------------------------------------------------------
 
-### `Step 9`: Add QWebChannel javascript interface
+## `Step 9`: Add QWebChannel javascript interface
 
 `api/qwebchannel/index.js` is the official QWebChannel javascript interface. However, it is different than
 the original (`index_org.js`) one. It has been updated to support `async`/`await` pattern instead of old-school
@@ -282,7 +550,7 @@ callback style usage. Addition to that a typescript definition has been attached
 
 ----------------------------------------------------------------
 
-### `Step 10`: Websocket Helper
+## `Step 10`: Websocket Helper
 
 Now, create a class to handle the websocket communication boiler-plate. You can use given `BaseAPI.ts`
 and `CommandAPI.ts` from the repository. The important part here is the implementation of `onChannelReady` callback
@@ -337,7 +605,7 @@ button?.addEventListener('click', () => {
 
 ----------------------------------------------------------------
 
-### `Step 11:` Run the projects
+## `Step 11:` Run the projects
 
 Now, run the `backend` project, and run the `frontend` project. If everything is correct, you should see an
 output from `backend` terminal:
@@ -359,7 +627,7 @@ it. If this is the case, you have successfully connected your python backend to 
 
 ----------------------------------------------------------------
 
-### `Step 12`: Use it
+## `Step 12`: Use it
 
 Let's use it and let our `backend` say hello to `frontend`'. Just update your code as it should be:
 
@@ -413,7 +681,7 @@ Refresh your web page, and click the button. You should see an alert message say
 
 ----------------------------------------------------------------
 
-### `Step 13`: Type hinting
+## `Step 13`: Type hinting
 
 Everything is ready to go. The ONLY MISSING part is type hint in our `frontend`, because we don't have any type
 defintion for our controller, `HelloWorldController`. Type script generator given by `pywebchannel` comes in play at
@@ -441,7 +709,7 @@ python ts_generator.py
 
 ----------------------------------------------------------------
 
-### `The last step`: Finalize your UI and serve it
+## `The last step`: Finalize your UI and serve it
 
 When you complete your UI, you can serve it inside your `backend` project.
 For that purpose, you have a couple of options as usual.
@@ -507,9 +775,9 @@ if __name__ == "__main__":
 
 This will spin a web server at port `12000`, and serve the `app_ui` folder. You can access your UI through
 a browser by typing `http://localhost:12000` into the address bar. This could be helpful, if you observe any weird
-behaviour on your it. The console on the browser could be helpful to debug the problem.
-
-### 🎊🎈✌️ Congratulations!!! 🎊🎈✌️
+behaviour on your it. The console on the browser could be helpful to debug the problem.</details>
+<details>
+<summary><h1>Congratulations!!! ✌️🎈🎊</h1></summary>
 
 You've successfully linked your Python backend to the frontend, introducing a tool capable of dynamically generating
 TypeScript interfaces by monitoring backend changes. This tool ensures that your frontend remains synchronized with
@@ -535,32 +803,27 @@ Consider the following steps as you continue to enhance your development process
 
 - Enhance accessibility by creating a user interface for the tool, catering to developers who may prefer graphical
   interfaces over command-line tools.
-- Implement features like configurable options and settings to further customize the tool's behavior.
-
-----------------------------------------------------------------
-
-## How to Contribute 🙌
+- Implement features like configurable options and settings to further customize the tool's behavior.</details>
+<details>
+<summary><h1>How to Contribute 🙌</h1></summary>
 
 If you want to contribute to this project, you are more than welcome. Here are some ways you can help:
 
 - Report any bugs or issues you find.
 - Suggest new features or improvements.
 - Submit pull requests with your code changes.
-- Share your feedback or suggestions.
-
-## License 📄
+- Share your feedback or suggestions.</details>
+<details>
+<summary><h1>License 📄</h1></summary>
 
 This project is licensed under the MIT License. See
-the [LICENSE](https://github.com/cihanuyanik/pywebchannel/blob/main/LICENSE) file for details.
-
-## Credits 🙏
+the [LICENSE](https://github.com/cihanuyanik/pywebchannel/blob/main/LICENSE) file for details.</details>
+<details>
+<summary><h1>Credits 🙏</h1></summary>
 
 This project was inspired by the following sources:
 
 - [QWebChannel](https://doc.qt.io/qt-5/qwebchannel.html) - a Qt module that enables seamless integration of C++ and
   HTML/JavaScript.
 - [PySide6](https://www.qt.io/qt-for-python) - a Python binding of the cross-platform GUI toolkit Qt.
-- [Solid](https://www.solidjs.com/) - a declarative JavaScript library for building user interfaces.
-- [TypeScript](https://www.typescriptlang.org/) - a superset of JavaScript that adds optional types.
-
-Thank you for your interest in `pywebchannel`. I hope you enjoy using it as much as I enjoyed creating it. 😊
+- [TypeScript](https://www.typescriptlang.org/) - a superset of JavaScript that adds optional types.</details>
