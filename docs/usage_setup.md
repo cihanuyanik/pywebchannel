@@ -20,7 +20,7 @@ functionality web library of yours.
 It is completely up to you. But having a meaningful directory
 structure could make things simpler. For that purpose suggested way is to create a root directory with your `AppName`
 and two folders under the root directory, `backend` and `frontend`. As names suggest, they will be holding your
-python project as `backend` and UI project as `frontend.
+python project as `backend` and UI project as `frontend`.
 
 ```
 📦AppName
@@ -211,7 +211,6 @@ and `models` directories as well, for nicely formatted structure.
  ┃  ┃  ┃  ┣ 📂qwebchannel
  ┃  ┃  ┃  ┃  ┣📜index.d.ts
  ┃  ┃  ┃  ┃  ┣📜index.js 
- ┃  ┃  ┃  ┃  ┣📜reeadme.txt
  ┃  ┃  ┣📜main.ts
  ┃  ┃  ┣📜vite-env-d.ts
  ┃  ┣📜index.html
@@ -313,12 +312,11 @@ it. If this is the case, you have successfully connected your python backend to 
 
 ## `Step 12`: Use it
 
-Let's use it and let our `backend` say hello to `frontend`'. Just update your code as it should be:
+Let's use it and let our `backend` say hello to `frontend`. Just update your code as it should be:
 
 Update `CommandAPI.ts`
 
 ```typescript
-
 export class CommandAPI extends BaseAPI {
   // Add an attribute for our API object
   HelloWorldController!: any;
@@ -381,7 +379,7 @@ this moment.
 python ts_generator.py
 ```
 
-- `Step 4:` You will see that the controller folder will be populated with an auto generated Type-script
+- `Step 4:` You will see that the `frontend` controller folder will be populated with an auto generated Type-script
   interface, `api/controllers/HelloWorldController.ts`
 
 - `Step 5:` Since it needs to use `Response` interface for type-hinting for return values, it needs to be located
@@ -457,6 +455,7 @@ if __name__ == "__main__":
     app.exec()
 ```
 
-This will spin a web server at port `12000`, and serve the `app_ui` folder. You can access your UI through
-a browser by typing `http://localhost:12000` into the address bar. This could be helpful, if you observe any weird
-behaviour on your it. The console on the browser could be helpful to debug the problem.
+This will spin a web server at port `12000`, and serve the `app_ui` folder, and creates a `QWebEngineView` to display
+your UI. You can also access your UI through a browser by typing `http://localhost:12000` into the address bar. This
+could be helpful, if you observe any weird behaviour on your UI. The console on the browser could be helpful to debug
+the problem.

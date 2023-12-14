@@ -158,7 +158,6 @@ And that’s it. This will:
 - create a private variable called `_todoCount` to store the value of your property.
 - create a getter and setter for you as exactly written above.
 - create a signal called `todoCountChanged`
--
 
 If you want to have a different implementation for your getter and setter, you can still define one or both of them, and
 pass it as an argument to `Property`.
