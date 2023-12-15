@@ -1,4 +1,4 @@
-import {QWebChannel} from "./qwebchannel";
+import { QWebChannel } from "./qwebchannel";
 
 /**
  * An abstract base class for API communication using WebSockets and QWebChannel.
@@ -62,8 +62,7 @@ export abstract class BaseAPI {
         reject(`Error connecting to ${this._serviceName}`);
 
       // Reject the promise if the WebSocket is closed
-      this._ws.onclose = () =>
-        reject(`${this._serviceName} connection closed`);
+      this._ws.onclose = () => reject(`${this._serviceName} connection closed`);
 
       // Create a new QWebChannel with the WebSocket when it is open
       this._ws.onopen = (e) =>
