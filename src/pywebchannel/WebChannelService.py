@@ -120,8 +120,6 @@ class WebSocketClientWrapper(QObject):
 
     Attributes:
         server (QWebSocketServer): The QWebSocketServer object that listens for WebSocket connections.
-        clientConnected (Signal): The signal that is emitted when a new WebSocket connection is established.
-        clientDisconnected (Signal): The signal that is emitted when an existing WebSocket connection is closed.
     """
 
     def __init__(
@@ -140,10 +138,12 @@ class WebSocketClientWrapper(QObject):
         # Connect the newConnection signal of the server to the handleNewConnection slot
         self.server.newConnection.connect(self.handleNewConnection)
 
-    # Define the clientConnected signal with the WebSocketTransport type
+    
     clientConnected = Signal(WebSocketTransport)
-    # Define the clientDisconnected signal with the WebSocketTransport type
+    """ The signal that is emitted when a new WebSocket connection is established. """
+    
     clientDisconnected = Signal(WebSocketTransport)
+    """ The signal that is emitted when an existing WebSocket connection is closed. """
 
     @Slot()
     def handleNewConnection(self) -> None:
