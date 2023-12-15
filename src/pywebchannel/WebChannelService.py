@@ -20,8 +20,7 @@ class WebSocketTransport(QWebChannelAbstractTransport):
     """A class that inherits from QWebChannelAbstractTransport and communicates with a QWebSocket.
 
     Attributes:
-        socket (QWebSocket): The QWebSocket object that handles the WebSocket connection.
-        disconnected (Signal): The signal that is emitted when the socket is disconnected.
+        socket (QWebSocket): The QWebSocket object that handles the WebSocket connection.        
     """
 
     def __init__(self, socket: QWebSocket) -> None:
@@ -39,8 +38,8 @@ class WebSocketTransport(QWebChannelAbstractTransport):
         # Connect the disconnected signal of the socket to the onSocketDisconnected slot
         self.socket.disconnected.connect(self.onSocketDisconnected)
 
-    # Define the disconnected signal with the QWebChannelAbstractTransport type
     disconnected = Signal(QWebChannelAbstractTransport)
+    """ The signal that is emitted when the socket is disconnected. """
 
     def __del__(self) -> None:
         """Deletes the WebSocketTransport object and the socket object."""
