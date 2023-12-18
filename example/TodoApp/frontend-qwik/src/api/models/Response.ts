@@ -1,0 +1,11 @@
+////////////////////////////////////////////////////
+// Auto generated file
+// Generation time: 2023-12-04 22:39:07
+////////////////////////////////////////////////////
+
+// Response interface
+export interface Response {
+  error: string;
+  success: string;
+  data: any;
+}
