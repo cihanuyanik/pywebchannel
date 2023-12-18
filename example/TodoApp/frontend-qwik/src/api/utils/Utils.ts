@@ -90,7 +90,7 @@ export class SignalConnectionManager {
   disconnectAll() {
     // Use a for loop to iterate over the array in reverse order
     for (const f of this._disconnectCalls) {
-      if (f) f();
+      f();
     }
     // Use the splice method to clear the array
     this._disconnectCalls.splice(0, this._disconnectCalls.length);

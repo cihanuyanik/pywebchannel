@@ -14,7 +14,6 @@ import { SignalConnManager } from "~/api/utils/Utils";
 import { createTodoStore, TodoContext } from "~/stores/todoStore";
 
 export default component$(() => {
-  // Create Todo Store
   useContextProvider(TodoContext, useStore(createTodoStore()));
   const todos = useContext(TodoContext);
 

@@ -28,7 +28,6 @@ export const createTodoStore = (): TodoStore => {
     add: $(function (this: TodoStore, todo: Todo) {
       this.ids.push(todo.id);
       this.entities[todo.id] = todo;
-      this.todoCount = this.ids.length;
     }),
 
     update: $(function (this: TodoStore, todo: Todo) {
@@ -38,7 +37,6 @@ export const createTodoStore = (): TodoStore => {
     remove: $(function (this: TodoStore, todo: Todo) {
       this.ids = this.ids.filter((id) => id !== todo.id);
       delete this.entities[todo.id];
-      this.todoCount = this.ids.length;
     }),
 
     setupConnections: $(async function (this: TodoStore) {
