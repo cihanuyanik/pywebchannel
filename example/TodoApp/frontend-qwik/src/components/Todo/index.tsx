@@ -5,6 +5,7 @@ import Circle from "~/components/icons/Circle";
 import DeleteOutline from "~/components/icons/DeleteOutline";
 import { TodoContext } from "~/stores/todoStore";
 import { API } from "~/api/CommandAPI";
+import { MessageBoxContext } from "~/components/Dialogs/MessageBox";
 
 type Props = {
   id: string;
@@ -12,15 +13,20 @@ type Props = {
 
 const Status = component$(({ id }: Props) => {
   const todos = useContext(TodoContext);
+  const messageBox = useContext(MessageBoxContext);
 
   const onCompletedChanged = $(async () => {
-    const response = await API.TodoController.update({
-      ...todos.entities[id],
-      completed: !todos.entities[id].completed,
-    });
+    try {
+      const response = await API.TodoController.update({
+        ...todos.entities[id],
+        completed: !todos.entities[id].completed,
+      });
 
-    if (response.error) {
-      console.log(response.error);
+      if (response.error) {
+        throw new Error(response.error);
+      }
+    } catch (e) {
+      await messageBox.error(`${e}`);
     }
   });
 
@@ -51,11 +57,14 @@ const Text = component$(({ id }: Props) => {
 });
 
 const DeleteButton = component$(({ id }: Props) => {
-  const onRemove = $(async () => {
-    const response = await API.TodoController.remove(id);
+  const messageBox = useContext(MessageBoxContext);
 
-    if (response.error) {
-      console.log(response.error);
+  const onRemove = $(async () => {
+    try {
+      const response = await API.TodoController.remove(id);
+      if (response.error) throw new Error(response.error);
+    } catch (e) {
+      await messageBox.error(`${e}`);
     }
   });
 
