@@ -1,9 +1,9 @@
 import { $, component$, useContext, useSignal } from "@builder.io/qwik";
-import "./style.scss";
-import AddCircle from "~/components/icons/AddCircle";
+import AddCircle from "~/media/icons/AddCircle";
 import { API } from "~/api/CommandAPI";
 import { v4 as uuidv4 } from "uuid";
 import { MessageBoxContext } from "~/components/Dialogs/MessageBox";
+import { todoInput } from "~/components/TodoInput.css";
 
 export default component$(() => {
   const inputRef = useSignal<HTMLInputElement>();
@@ -34,7 +34,7 @@ export default component$(() => {
   });
 
   return (
-    <div class={"todo-input"}>
+    <div class={todoInput}>
       <input ref={inputRef} onKeyUp$={onKeyUp} />
       <button onClick$={onAdd}>
         <AddCircle />

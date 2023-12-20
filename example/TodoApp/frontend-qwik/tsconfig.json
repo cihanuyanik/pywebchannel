@@ -22,6 +22,7 @@
     "outDir": "tmp",
     "noEmit": true,
     "noUnusedParameters": false,
+
     "types": [
       "node",
       "vite/client"

@@ -1,11 +1,11 @@
 import { $, component$, useContext } from "@builder.io/qwik";
-import "./style.scss";
-import CheckMarkDone from "~/components/icons/CheckMarkDone";
-import Circle from "~/components/icons/Circle";
-import DeleteOutline from "~/components/icons/DeleteOutline";
+import CheckMarkDone from "~/media/icons/CheckMarkDone";
+import Circle from "~/media/icons/Circle";
+import DeleteOutline from "~/media/icons/DeleteOutline";
 import { TodoContext } from "~/stores/todoStore";
 import { API } from "~/api/CommandAPI";
 import { MessageBoxContext } from "~/components/Dialogs/MessageBox";
+import { status, todo } from "~/components/Todo.css";
 
 type Props = {
   id: string;
@@ -31,11 +31,9 @@ const Status = component$(({ id }: Props) => {
   });
 
   return (
-    <div class="status" onClick$={onCompletedChanged}>
+    <div class={status} onClick$={onCompletedChanged}>
       {todos.entities[id].completed ? (
-        <CheckMarkDone
-          style={{ color: "green", height: "30px", width: "30px" }}
-        />
+        <CheckMarkDone style={{ color: "green" }} />
       ) : (
         <Circle />
       )}
@@ -76,7 +74,7 @@ const DeleteButton = component$(({ id }: Props) => {
 });
 export default component$(({ id }: Props) => {
   return (
-    <div class="todo">
+    <div class={todo}>
       <Status id={id} />
       <Text id={id} />
       <DeleteButton id={id} />

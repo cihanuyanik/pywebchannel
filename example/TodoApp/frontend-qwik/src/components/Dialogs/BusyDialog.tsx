@@ -5,7 +5,7 @@ import {
   type QRL,
   useContext,
 } from "@builder.io/qwik";
-import "./style.scss";
+import { busyDialogContent, dialog } from "~/components/Dialogs/Dialog.css";
 
 export type BusyDialogStore = {
   dialogRef: HTMLDialogElement | null;
@@ -36,8 +36,8 @@ export const BusyDialog = component$(() => {
   const busyDialog = useContext(BusyDialogContext);
 
   return (
-    <dialog ref={(el) => (busyDialog.dialogRef = el)} class={"dialog"}>
-      <div class={"busy-dialog-content"}>
+    <dialog ref={(el) => (busyDialog.dialogRef = el)} class={dialog}>
+      <div class={busyDialogContent}>
         {/* eslint-disable-next-line qwik/jsx-img */}
         <img src="/assets/busydialog.gif" alt={"Busy Dialog gif"} />
         <p>{busyDialog.message}</p>

@@ -5,8 +5,7 @@ import {
   useStore,
   useVisibleTask$,
 } from "@builder.io/qwik";
-import "./style.scss";
-import Header from "../Header";
+import Header from "./Header";
 import TodoInput from "~/components/TodoInput";
 import TodoList from "~/components/TodoList";
 import { API } from "~/api/CommandAPI";
@@ -22,6 +21,8 @@ import {
   MessageBox,
   MessageBoxContext,
 } from "~/components/Dialogs/MessageBox";
+import { appContainer } from "~/components/App.css";
+import { themeClass } from "~/style/theme.css";
 
 export default component$(() => {
   // Create stores and provide them to the context
@@ -53,7 +54,7 @@ export default component$(() => {
   });
 
   return (
-    <div class={"app-container"}>
+    <div class={`${themeClass} ${appContainer}`}>
       <Header />
       <TodoInput />
       <TodoList />

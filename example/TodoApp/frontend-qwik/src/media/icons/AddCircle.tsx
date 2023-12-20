@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
-export default component$(() => {
+export default component$((props) => {
   return (
     <svg
       stroke="currentColor"
@@ -10,6 +10,7 @@ export default component$(() => {
       height="200px"
       width="200px"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         fill="none"

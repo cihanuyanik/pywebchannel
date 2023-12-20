@@ -1,6 +1,6 @@
 import { component$, useComputed$, useContext } from "@builder.io/qwik";
-import "./style.scss";
 import { TodoContext } from "~/stores/todoStore";
+import { header } from "~/components/Header.css";
 
 export default component$(() => {
   const todos = useContext(TodoContext);
@@ -14,7 +14,7 @@ export default component$(() => {
   });
 
   return (
-    <div class={"header"}>
+    <div class={header}>
       Todo App (#: {completedTodoCount}/{todos.todoCount})
     </div>
   );

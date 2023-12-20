@@ -1,11 +1,17 @@
 import type { QRL } from "@builder.io/qwik";
 import { $, component$, createContextId, useContext } from "@builder.io/qwik";
-import "./style.scss";
 import ErrorImage from "~/media/assets/error.png?jsx";
 import WarningImage from "~/media/assets/warning.png?jsx";
 import InfoImage from "~/media/assets/info.png?jsx";
 import SuccessImage from "~/media/assets/success.png?jsx";
-import Tick from "~/components/icons/Tick";
+import Tick from "~/media/icons/Tick";
+import {
+  controls,
+  dialog,
+  imageMessage,
+  messageBoxContent,
+  title,
+} from "~/components/Dialogs/Dialog.css";
 
 export type MessageBoxStore = {
   dialogRef: HTMLDialogElement | null;
@@ -93,16 +99,16 @@ export const MessageBox = component$(() => {
   const messageBox = useContext(MessageBoxContext);
 
   return (
-    <dialog ref={(el) => (messageBox.dialogRef = el)} class="dialog">
-      <div class="message-box-content">
-        <div class="title">
+    <dialog ref={(el) => (messageBox.dialogRef = el)} class={dialog}>
+      <div class={messageBoxContent}>
+        <div class={title}>
           <p>{messageBox.title}</p>
         </div>
-        <div class="image-message">
+        <div class={imageMessage}>
           {iconMap[messageBox.type]}
           <div>{messageBox.message}</div>
         </div>
-        <div class="controls">
+        <div class={controls}>
           <button onClick$={() => messageBox.close()}>
             OK <Tick />
           </button>
