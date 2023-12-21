@@ -21,8 +21,8 @@ import {
   MessageBox,
   MessageBoxContext,
 } from "~/components/Dialogs/MessageBox";
-import { appContainer } from "~/components/App.css";
 import { themeClass } from "~/style/theme.css";
+import { appContainer } from "~/components/App.css";
 
 export default component$(() => {
   // Create stores and provide them to the context

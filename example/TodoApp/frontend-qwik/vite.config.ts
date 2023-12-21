@@ -5,8 +5,9 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import {vanillaExtractPlugin} from "@vanilla-extract/vite-plugin";
 
 export default defineConfig(() => {
+  
   return {
-    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), vanillaExtractPlugin(),],
+    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), vanillaExtractPlugin()],
     dev: {
       headers: {
         "Cache-Control": "public, max-age=0",

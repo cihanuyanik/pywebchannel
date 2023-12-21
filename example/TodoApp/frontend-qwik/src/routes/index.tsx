@@ -2,7 +2,6 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import "./index.css";
 import App from "~/components/App";
-
 export default component$(() => {
   return <App />;
 });
