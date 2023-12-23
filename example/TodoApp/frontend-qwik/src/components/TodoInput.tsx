@@ -3,7 +3,7 @@ import AddCircle from "~/media/icons/AddCircle";
 import { API } from "~/api/CommandAPI";
 import { v4 as uuidv4 } from "uuid";
 import { MessageBoxContext } from "~/components/Dialogs/MessageBox";
-import { todoInput } from "~/components/TodoInput.css";
+import { container, input } from "~/components/TodoInput.css";
 
 export default component$(() => {
   const inputRef = useSignal<HTMLInputElement>();
@@ -18,7 +18,7 @@ export default component$(() => {
         id: uuidv4(),
         text: input.value.trim(),
         completed: false,
-        isSelected: false,
+        isSelected: false
       });
 
       if (response.error) throw new Error(response.error);
@@ -34,8 +34,8 @@ export default component$(() => {
   });
 
   return (
-    <div class={todoInput}>
-      <input ref={inputRef} onKeyUp$={onKeyUp} />
+    <div class={container}>
+      <input class={input} ref={inputRef} onKeyUp$={onKeyUp} />
       <button onClick$={onAdd}>
         <AddCircle />
       </button>

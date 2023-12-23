@@ -5,13 +5,7 @@ import WarningImage from "~/media/assets/warning.png?jsx";
 import InfoImage from "~/media/assets/info.png?jsx";
 import SuccessImage from "~/media/assets/success.png?jsx";
 import Tick from "~/media/icons/Tick";
-import {
-  controls,
-  dialog,
-  imageMessage,
-  messageBoxContent,
-  title,
-} from "~/components/Dialogs/Dialog.css";
+import { button, controls, dialog, imageMessage, messageBoxContent, title } from "~/components/Dialogs/Dialog.css";
 
 export type MessageBoxStore = {
   dialogRef: HTMLDialogElement | null;
@@ -19,13 +13,9 @@ export type MessageBoxStore = {
   title: string;
   message: string;
   error: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
-  warning: QRL<
-    (this: MessageBoxStore, message: string, title?: string) => void
-  >;
+  warning: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
   info: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
-  success: QRL<
-    (this: MessageBoxStore, message: string, title?: string) => void
-  >;
+  success: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
   close: QRL<(this: MessageBoxStore) => void>;
 };
 
@@ -36,44 +26,28 @@ export const createMessageBoxStore = (): MessageBoxStore => {
     title: "",
     message: "",
 
-    error: $(function (
-      this: MessageBoxStore,
-      message: string,
-      title: string = "",
-    ) {
+    error: $(function (this: MessageBoxStore, message: string, title: string = "") {
       this.type = "error";
       this.message = message;
       this.title = title === "" ? "Error" : title;
       this.dialogRef?.showModal();
     }),
 
-    warning: $(function (
-      this: MessageBoxStore,
-      message: string,
-      title: string = "",
-    ) {
+    warning: $(function (this: MessageBoxStore, message: string, title: string = "") {
       this.type = "warning";
       this.message = message;
       this.title = title === "" ? "Warning" : title;
       this.dialogRef?.showModal();
     }),
 
-    info: $(function (
-      this: MessageBoxStore,
-      message: string,
-      title: string = "",
-    ) {
+    info: $(function (this: MessageBoxStore, message: string, title: string = "") {
       this.type = "info";
       this.message = message;
       this.title = title === "" ? "Information" : title;
       this.dialogRef?.showModal();
     }),
 
-    success: $(function (
-      this: MessageBoxStore,
-      message: string,
-      title: string = "",
-    ) {
+    success: $(function (this: MessageBoxStore, message: string, title: string = "") {
       this.type = "success";
       this.message = message;
       this.title = title === "" ? "Successful" : title;
@@ -82,7 +56,7 @@ export const createMessageBoxStore = (): MessageBoxStore => {
 
     close: $(function (this: MessageBoxStore) {
       this.dialogRef?.close();
-    }),
+    })
   };
 };
 
@@ -92,7 +66,7 @@ const iconMap = {
   error: <ErrorImage />,
   warning: <WarningImage />,
   info: <InfoImage />,
-  success: <SuccessImage />,
+  success: <SuccessImage />
 };
 
 export const MessageBox = component$(() => {
@@ -109,7 +83,7 @@ export const MessageBox = component$(() => {
           <div>{messageBox.message}</div>
         </div>
         <div class={controls}>
-          <button onClick$={() => messageBox.close()}>
+          <button class={button} onClick$={() => messageBox.close()}>
             OK <Tick />
           </button>
         </div>
