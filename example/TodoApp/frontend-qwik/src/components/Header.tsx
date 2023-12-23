@@ -15,7 +15,10 @@ export default component$(() => {
 
   return (
     <div class={header}>
-      Todo App (#: {completedTodoCount}/{todos.todoCount})
+      <p>Todo App</p>
+      <p>
+        (#: {completedTodoCount}/{todos.todoCount})
+      </p>
     </div>
   );
 });
