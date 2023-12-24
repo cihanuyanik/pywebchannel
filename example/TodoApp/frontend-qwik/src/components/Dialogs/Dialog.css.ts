@@ -45,7 +45,7 @@ export const imageMessage = new StyleBuilder()
   .build("imageMessage");
 
 export const controls = new StyleBuilder()
-  .flex({ direction: "row", alignItems: "center", justifyContent: "center" })
+  .flex({ direction: "row", alignItems: "center", justifyContent: "center", gap: "4px" })
   .padding("4px")
   .build("controls");
 
@@ -55,6 +55,8 @@ export const button = new StyleBuilder()
   .size({ height: "26px" })
   .flex({ direction: "row", alignItems: "center", justifyContent: "center", gap: "4px" })
   .font({ size: "15px", weight: "bolder" })
-  // @ts-ignore
-  .combine({ [`& svg`]: { height: "24px", width: "24px", color: "green" } })
   .build("button");
+
+export const tickIcon = new StyleBuilder().color("green").size({ height: "20px", width: "20px" }).build("tickIcon");
+
+export const crossIcon = new StyleBuilder().color("red").build("crossIcon");

@@ -19,7 +19,7 @@ const Status = component$(({ id }: Props) => {
     try {
       const response = await API.TodoController.update({
         ...todos.entities[id],
-        completed: !todos.entities[id].completed,
+        completed: !todos.entities[id].completed
       });
 
       if (response.error) {
@@ -32,11 +32,7 @@ const Status = component$(({ id }: Props) => {
 
   return (
     <div class={status} onClick$={onCompletedChanged}>
-      {todos.entities[id].completed ? (
-        <CheckMarkDone style={{ color: "green" }} />
-      ) : (
-        <Circle />
-      )}
+      {todos.entities[id].completed ? <CheckMarkDone style={{ color: "green" }} /> : <Circle />}
     </div>
   );
 });
@@ -46,7 +42,7 @@ const Text = component$(({ id }: Props) => {
   return (
     <span
       style={{
-        textDecoration: todos.entities[id].completed ? "line-through" : "none",
+        textDecoration: todos.entities[id].completed ? "line-through" : "none"
       }}
     >
       {todos.entities[id].text}
@@ -59,6 +55,9 @@ const DeleteButton = component$(({ id }: Props) => {
 
   const onRemove = $(async () => {
     try {
+      const dialogResult = await messageBox.question("Are you sure you want to delete this todo?");
+      if (dialogResult === "No") return;
+
       const response = await API.TodoController.remove(id);
       if (response.error) throw new Error(response.error);
     } catch (e) {

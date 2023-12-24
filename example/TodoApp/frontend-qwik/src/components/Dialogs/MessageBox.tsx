@@ -4,18 +4,39 @@ import ErrorImage from "~/media/assets/error.png?jsx";
 import WarningImage from "~/media/assets/warning.png?jsx";
 import InfoImage from "~/media/assets/info.png?jsx";
 import SuccessImage from "~/media/assets/success.png?jsx";
+import QuestionImage from "~/media/assets/question.png?jsx";
 import Tick from "~/media/icons/Tick";
-import { button, controls, dialog, imageMessage, messageBoxContent, title } from "~/components/Dialogs/Dialog.css";
+import {
+  button,
+  controls,
+  crossIcon,
+  dialog,
+  imageMessage,
+  messageBoxContent,
+  tickIcon,
+  title
+} from "~/components/Dialogs/Dialog.css";
+import Cross from "~/media/icons/Cross";
+
+// Enum type for the MessageBox dialog result
+export enum DialogResult {
+  OK = "OK",
+  Cancel = "Cancel",
+  Yes = "Yes",
+  No = "No"
+}
 
 export type MessageBoxStore = {
   dialogRef: HTMLDialogElement | null;
-  type: "error" | "warning" | "info" | "success";
+  type: "error" | "warning" | "info" | "success" | "question";
   title: string;
   message: string;
+  dialogResult: DialogResult;
   error: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
   warning: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
   info: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
   success: QRL<(this: MessageBoxStore, message: string, title?: string) => void>;
+  question: QRL<(this: MessageBoxStore, message: string, title?: string) => Promise<DialogResult>>;
   close: QRL<(this: MessageBoxStore) => void>;
 };
 
@@ -25,6 +46,7 @@ export const createMessageBoxStore = (): MessageBoxStore => {
     type: "error",
     title: "",
     message: "",
+    dialogResult: DialogResult.OK,
 
     error: $(function (this: MessageBoxStore, message: string, title: string = "") {
       this.type = "error";
@@ -54,6 +76,21 @@ export const createMessageBoxStore = (): MessageBoxStore => {
       this.dialogRef?.showModal();
     }),
 
+    question: $(function (this: MessageBoxStore, message: string, title: string = "") {
+      this.type = "question";
+      this.message = message;
+      this.title = title === "" ? "???" : title;
+      this.dialogRef?.showModal();
+      return new Promise<DialogResult>((resolve) => {
+        const closeHandler = () => {
+          resolve(this.dialogResult);
+          this.dialogRef?.removeEventListener("close", closeHandler);
+        };
+
+        this.dialogRef?.addEventListener("close", closeHandler);
+      });
+    }),
+
     close: $(function (this: MessageBoxStore) {
       this.dialogRef?.close();
     })
@@ -66,7 +103,8 @@ const iconMap = {
   error: <ErrorImage />,
   warning: <WarningImage />,
   info: <InfoImage />,
-  success: <SuccessImage />
+  success: <SuccessImage />,
+  question: <QuestionImage />
 };
 
 export const MessageBox = component$(() => {
@@ -83,9 +121,38 @@ export const MessageBox = component$(() => {
           <div>{messageBox.message}</div>
         </div>
         <div class={controls}>
-          <button class={button} onClick$={() => messageBox.close()}>
-            OK <Tick />
-          </button>
+          {messageBox.type === "question" ? (
+            <>
+              <button
+                class={button}
+                onClick$={async () => {
+                  messageBox.dialogResult = DialogResult.Yes;
+                  await messageBox.close();
+                }}
+              >
+                Yes <Tick class={tickIcon} />
+              </button>
+              <button
+                class={button}
+                onClick$={async () => {
+                  messageBox.dialogResult = DialogResult.No;
+                  await messageBox.close();
+                }}
+              >
+                No <Cross class={crossIcon} />
+              </button>
+            </>
+          ) : (
+            <button
+              class={button}
+              onClick$={async () => {
+                messageBox.dialogResult = DialogResult.OK;
+                await messageBox.close();
+              }}
+            >
+              OK <Tick class={tickIcon} />
+            </button>
+          )}
         </div>
       </div>
     </dialog>
