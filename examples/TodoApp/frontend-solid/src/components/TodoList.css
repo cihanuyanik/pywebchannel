@@ -1,0 +1,27 @@
+:export {
+  primaryColor: #4d1d83;
+  primaryColorLighter: #74449d;
+  primaryColorDarker: #260548;
+  secondaryColor: #0c0979;
+  secondaryColorLighter: #534ef2;
+  secondaryColorDarker: #06043c;
+  tertiaryColor: #4e8fcd;
+  tertiaryColorLighter: #a6c7e6;
+  tertiaryColorDarker: #1f486e;
+  textColor: #ffffff;
+  blackColor: #000000;
+}
+
+.todoList {
+  background-color: #4e8fcd;
+  padding: 25px 40px;
+  display: grid;
+  grid-auto-flow: row;
+  align-content: start;
+  gap: 4px;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+/*# sourceMappingURL=TodoList.css.map */

@@ -1,0 +1,42 @@
+:export {
+  primaryColor: #4d1d83;
+  primaryColorLighter: #74449d;
+  primaryColorDarker: #260548;
+  secondaryColor: #0c0979;
+  secondaryColorLighter: #534ef2;
+  secondaryColorDarker: #06043c;
+  tertiaryColor: #4e8fcd;
+  tertiaryColorLighter: #a6c7e6;
+  tertiaryColorDarker: #1f486e;
+  textColor: #ffffff;
+  blackColor: #000000;
+}
+
+.todoInput-container {
+  position: absolute;
+  top: 75px;
+  z-index: 3;
+  width: 100%;
+  height: 50px;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  align-items: center;
+}
+
+.todoInput-input {
+  color: #4d1d83;
+  background-color: #a6c7e6;
+  border-radius: 10px 10px 4px 4px;
+  padding: 5px;
+  font-weight: bolder;
+  text-align: center;
+  box-shadow: 2px 5px 10px #260548;
+  transition: box-shadow 200ms ease-in-out;
+}
+.todoInput-input:focus {
+  box-shadow: 0 0 10px 8px #74449d;
+}
+
+/*# sourceMappingURL=TodoInput.css.map */

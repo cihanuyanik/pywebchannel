@@ -1,0 +1,37 @@
+@use "../theme" as theme;
+
+.todo {
+  height: 50px;
+  padding: 0 5px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 5px;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px theme.$primary-color-darker;
+  background: linear-gradient(
+    to left,
+    theme.$secondary-color-darker 10%,
+    theme.$secondary-color 50%,
+    theme.$secondary-color-lighter 90%
+  );
+  transition: transform 200ms ease-in-out;
+  &:hover {
+    background: linear-gradient(
+      to right,
+      theme.$secondary-color-darker 10%,
+      theme.$secondary-color 50%,
+      theme.$secondary-color-lighter 90%
+    );
+    transform: scale(1.01);
+  }
+
+  .status {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    &:hover svg {
+      color: theme.$tertiary-color-lighter;
+    }
+  }
+}

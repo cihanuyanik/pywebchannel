@@ -1,0 +1,28 @@
+@use "../theme" as theme;
+
+.todoInput-container {
+  position: absolute;
+  top: 75px;
+  z-index: 3;
+  width: 100%;
+  height: 50px;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  align-items: center;
+}
+
+.todoInput-input {
+  color: theme.$primary-color;
+  background-color: theme.$tertiary-color-lighter;
+  border-radius: 10px 10px 4px 4px;
+  padding: 5px;
+  font-weight: bolder;
+  text-align: center;
+  box-shadow: 2px 5px 10px theme.$primary-color-darker;
+  transition: box-shadow 200ms ease-in-out;
+  &:focus {
+    box-shadow: 0 0 10px 8px theme.$primary-color-lighter;
+  }
+}

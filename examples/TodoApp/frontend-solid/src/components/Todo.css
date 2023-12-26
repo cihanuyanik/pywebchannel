@@ -1,0 +1,40 @@
+:export {
+  primaryColor: #4d1d83;
+  primaryColorLighter: #74449d;
+  primaryColorDarker: #260548;
+  secondaryColor: #0c0979;
+  secondaryColorLighter: #534ef2;
+  secondaryColorDarker: #06043c;
+  tertiaryColor: #4e8fcd;
+  tertiaryColorLighter: #a6c7e6;
+  tertiaryColorDarker: #1f486e;
+  textColor: #ffffff;
+  blackColor: #000000;
+}
+
+.todo {
+  height: 50px;
+  padding: 0 5px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 5px;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px #260548;
+  background: linear-gradient(to left, #06043c 10%, #0c0979 50%, #534ef2 90%);
+  transition: transform 200ms ease-in-out;
+}
+.todo:hover {
+  background: linear-gradient(to right, #06043c 10%, #0c0979 50%, #534ef2 90%);
+  transform: scale(1.01);
+}
+.todo .status {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+.todo .status:hover svg {
+  color: #a6c7e6;
+}
+
+/*# sourceMappingURL=Todo.css.map */

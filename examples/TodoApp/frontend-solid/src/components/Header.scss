@@ -1,0 +1,20 @@
+@use "../theme" as theme;
+
+.header {
+  background: linear-gradient(
+    to bottom,
+    theme.$secondary-color-darker 10%,
+    theme.$secondary-color 50%,
+    theme.$secondary-color-lighter 90%
+  );
+  width: 100%;
+  height: 100px;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-weight: bolder;
+  font-size: 25px;
+  border-bottom: 3px solid #1a1a1a;
+}

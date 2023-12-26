@@ -1,0 +1,100 @@
+:export {
+  primaryColor: #4d1d83;
+  primaryColorLighter: #74449d;
+  primaryColorDarker: #260548;
+  secondaryColor: #0c0979;
+  secondaryColorLighter: #534ef2;
+  secondaryColorDarker: #06043c;
+  tertiaryColor: #4e8fcd;
+  tertiaryColorLighter: #a6c7e6;
+  tertiaryColorDarker: #1f486e;
+  textColor: #ffffff;
+  blackColor: #000000;
+}
+
+.dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  background: transparent;
+  box-shadow: 0 0 10px 8px #260548;
+  font-weight: bolder;
+  font-size: 18px;
+}
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+.dialog .busyDialogContent {
+  display: grid;
+  grid-auto-flow: row;
+  align-content: center;
+  justify-content: center;
+  background-color: #4d1d83;
+  text-align: center;
+  opacity: 70%;
+}
+.dialog .messageBoxContent {
+  display: grid;
+  grid-auto-flow: row;
+  background-color: #0c0979;
+}
+.dialog .title {
+  height: 36px;
+  display: grid;
+  grid-auto-flow: row;
+  align-content: center;
+  justify-content: center;
+  border-bottom: 3px solid #06043c;
+}
+.dialog .imageMessage {
+  margin: 0 5px;
+  padding: 4px 12px;
+  border-bottom: 3px solid #06043c;
+  background-color: #4e8fcd;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  font-size: 15px;
+}
+.dialog .imageMessage img {
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+.dialog .controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px;
+}
+.dialog .button {
+  flex: 1;
+  border-radius: 4px;
+  height: 26px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.dialog .tickIcon {
+  height: 20px;
+  width: 20px;
+  color: green;
+}
+.dialog .crossIcon {
+  color: red;
+}
+
+/*# sourceMappingURL=Dialog.css.map */

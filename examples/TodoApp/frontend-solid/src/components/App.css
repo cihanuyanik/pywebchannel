@@ -1,0 +1,24 @@
+:export {
+  primaryColor: #4d1d83;
+  primaryColorLighter: #74449d;
+  primaryColorDarker: #260548;
+  secondaryColor: #0c0979;
+  secondaryColorLighter: #534ef2;
+  secondaryColorDarker: #06043c;
+  tertiaryColor: #4e8fcd;
+  tertiaryColorLighter: #a6c7e6;
+  tertiaryColorDarker: #1f486e;
+  textColor: #ffffff;
+  blackColor: #000000;
+}
+
+.appContainer {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  color: #ffffff;
+  position: relative;
+}
+
+/*# sourceMappingURL=App.css.map */

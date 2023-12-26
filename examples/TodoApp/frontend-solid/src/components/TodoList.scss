@@ -1,0 +1,13 @@
+@use "../theme" as theme;
+
+.todoList {
+  background-color: theme.$tertiary-color;
+  padding: 25px 40px;
+  display: grid;
+  grid-auto-flow: row;
+  align-content: start;
+  gap: 4px;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+}
