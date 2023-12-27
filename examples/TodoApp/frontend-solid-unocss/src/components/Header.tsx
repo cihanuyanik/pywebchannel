@@ -14,10 +14,9 @@ export default function Header() {
 
   return (
     <div
-      class="h-100px w-full
-             bg-gradient-to-b from-secondaryDarker to-secondaryLighter
-             grid place-items-center"
-      // @ts-ignore
+      h={"100px"}
+      grid={"rows items-center justify-center"}
+      bg={"gradient-to-b_secondaryDarker_secondaryLighter"}
       font="bold size-7"
       border-b="3px solid secondaryDarker"
     >

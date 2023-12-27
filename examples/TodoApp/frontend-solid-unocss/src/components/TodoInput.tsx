@@ -31,21 +31,25 @@ export default function TodoInput() {
 
   return (
     <div
-      // @ts-ignore
-      grid="~ cols-[1fr_auto] gap-1 items-center"
+      grid={"cols-[1fr_auto] gap-1 items-center"}
+      position={"absolute top-70px z-3"}
+      w={"full"}
+      h={"50px"}
       p="x-40px"
-      class="absolute top-70px z-3 w-full h-50px"
     >
       <input
         ref={input!}
         onKeyUp={onKeyUp}
-        class="color-primary bg-tertiaryLighter
-              font-bold text-center p-5px
-              rounded-tl-10px rounded-tr-10px rounded-br-4px rounded-bl-4px
-              shadow-primaryDarker shadow-[2px_5px_10px]
-              focus:(shadow-primaryLighter shadow-[0_0_10px_8px])
-              transition-shadow
-              "
+        color={"primary"}
+        bg={"tertiaryLighter"}
+        font={"bold center"}
+        text-center
+        p={"5px"}
+        rounded={"tl-3 tr-3 br-1 bl-1"}
+        shadow={
+          "primaryDarker [2px_5px_10px] focus:(primaryLighter [0_0_10px_8px])"
+        }
+        transition={"shadow"}
       />
       <button onClick={onAdd}>
         <AddCircle />

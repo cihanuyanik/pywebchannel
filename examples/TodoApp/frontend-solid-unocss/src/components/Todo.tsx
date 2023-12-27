@@ -5,12 +5,12 @@ import Circle from "./icons/Circle";
 import CheckMarkDone from "./icons/CheckMarkDone";
 import { messageBox } from "./Dialogs/MessageBox";
 
-export default function Todo(id: string) {
+function Status(props: { id: string }) {
   const onCompletedChanged = async () => {
     try {
       const response = await API.TodoController.update({
-        ...todos.entities[id],
-        completed: !todos.entities[id].completed,
+        ...todos.entities[props.id],
+        completed: !todos.entities[props.id].completed,
       });
 
       if (response.error) {
@@ -23,48 +23,73 @@ export default function Todo(id: string) {
 
   return (
     <div
-      class="h-50px p-x-5px
-            grid grid-cols-[auto_1fr_auto] items-center gap-1
-            rounded-5px
-            shadow-primaryDarker shadow-[0_2px_2px]
-            bg-gradient-to-l from-secondaryDarker to-secondaryLighter
-            hover:(bg-gradient-to-r from-secondaryDarker to-secondaryLighter)
-            scale-100 hover:scale-102
-            transition-transform"
+      h={"30px"}
+      w={"30px"}
+      mr={"10px"}
+      hover={"[&_svg]:color-tertiary"}
+      onClick={onCompletedChanged}
     >
-      <div
-        class="h-30px w-30px mr-10px hover:[&_svg]:color-tertiaryLighter"
-        onClick={onCompletedChanged}
-      >
-        {todos.entities[id].completed ? (
-          <CheckMarkDone class="h-30px w-30px color-green" />
-        ) : (
-          <Circle />
-        )}
-      </div>
+      {todos.entities[props.id].completed ? (
+        <CheckMarkDone
+          h={"30px"}
+          w={"30px"}
+          color={"green"}
+        />
+      ) : (
+        <Circle />
+      )}
+    </div>
+  );
+}
 
-      <span class={todos.entities[id].completed ? "line-through" : ""}>
-        {todos.entities[id].text}
-      </span>
+function Text(props: { id: string }) {
+  return (
+    <span class={todos.entities[props.id].completed ? "line-through" : ""}>
+      {todos.entities[props.id].text}
+    </span>
+  );
+}
 
-      {todos.entities[id].isSelected ? "selected" : null}
-      <button
-        onClick={async () => {
-          try {
-            const dialogResult = await messageBox.question(
-              "Are you sure you want to delete this todo?",
-            );
-            if (dialogResult === "No") return;
+function DeleteButton(props: { id: string }) {
+  async function onClick() {
+    try {
+      const dialogResult = await messageBox.question(
+        "Are you sure you want to delete this todo?",
+      );
+      if (dialogResult === "No") return;
 
-            const response = await API.TodoController.remove(id);
-            if (response.error) throw new Error(response.error);
-          } catch (e) {
-            messageBox.error(`${e}`);
-          }
-        }}
-      >
-        <DeleteOutline />
-      </button>
+      const response = await API.TodoController.remove(props.id);
+      if (response.error) throw new Error(response.error);
+    } catch (e) {
+      messageBox.error(`${e}`);
+    }
+  }
+
+  return (
+    <button onClick={onClick}>
+      <DeleteOutline />
+    </button>
+  );
+}
+
+export default function Todo(id: string) {
+  return (
+    <div
+      h={"50px"}
+      p={"x-2"}
+      grid={"cols-[auto_1fr_auto] items-center gap-1"}
+      rounded={"5px"}
+      shadow={"primaryDarker [0_2px_2px]"}
+      bg={
+        "gradient-to-l_secondaryDarker_secondaryLighter " +
+        "hover:(gradient-to-r_secondaryDarker_secondaryLighter)"
+      }
+      scale={"100 hover:(102)"}
+      transition={"transform"}
+    >
+      <Status id={id} />
+      <Text id={id} />
+      <DeleteButton id={id} />
     </div>
   );
 }

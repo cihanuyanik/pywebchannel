@@ -11,7 +11,16 @@ import {
 
 export default defineConfig({
   shortcuts: [
-    // ...
+    {
+      grid: "grid",
+    },
+    [/^grid-(.*)$/, ([, dir]) => `grid grid-flow-${dir.slice(0, 3)}`],
+    [/^grid-(.*)-(.*)$/, ([, dir, template]) => `grid grid-${dir}-${template}`],
+    [
+      /^bg-gradient-(.*)_(.*)_(.*)$/,
+      ([, dir, beginColor, endColor]) =>
+        `bg-gradient-${dir} from-${beginColor} to-${endColor}`,
+    ],
   ],
   theme: {
     colors: {

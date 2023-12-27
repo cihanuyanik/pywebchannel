@@ -28,8 +28,12 @@ export default function App() {
   });
 
   return (
-    // @ts-ignore
-    <div h="screen" grid="~ rows-[auto_1fr]" class="color-text relative">
+    <div
+      h={"screen"}
+      grid={"rows-[auto_1fr]"}
+      position={"relative"}
+      color="text"
+    >
       <Header />
       <TodoInput />
       <TodoList />

@@ -1,24 +1,20 @@
 import { createStore } from "solid-js/store";
-import ErrorImage from "/src/assets/error.png";
-import WarningImage from "/src/assets/warning.png";
-import InfoImage from "/src/assets/info.png";
-import SuccessImage from "/src/assets/success.png";
-import QuestionImage from "/src/assets/question.png";
 import { Tick } from "../icons/Tick";
 import { Cross } from "../icons/Cross";
 import { createMutator } from "../../stores/utils";
-
-// Enum type for the MessageBox dialog result
-export enum DialogResult {
-  OK = "OK",
-  Cancel = "Cancel",
-  Yes = "Yes",
-  No = "No",
-}
+import {
+  Button,
+  Content,
+  Controls,
+  Dialog,
+  DialogResult,
+  DialogType,
+  Title,
+} from "./Dialog";
 
 export type MessageBoxStore = {
   dialogRef: HTMLDialogElement | null;
-  type: "error" | "warning" | "info" | "success" | "question";
+  type: DialogType;
   title: string;
   message: string;
   dialogResult: DialogResult;
@@ -104,74 +100,34 @@ export const [messageBox, setMessageBox] = createStore<MessageBoxStore>({
 const mutate = createMutator(setMessageBox);
 
 export const MessageBox = () => {
-  const iconMap = {
-    error: ErrorImage,
-    warning: WarningImage,
-    info: InfoImage,
-    success: SuccessImage,
-    question: QuestionImage,
-  };
-
   return (
-    <dialog
-      ref={(el) => setMessageBox("dialogRef", el)}
-      class="absolute top-50% left-50% z-9999 translate-x-[-50%] translate-y-[-50%]
-      w-400px outline-none border-none rounded-10px
-      color-text bg-transparent [&::backdrop]:(bg-[rgba(0,0,0,0.5)])
-      shadow-primaryDarker shadow-[0_0_10px_8px]
-      font-size-18px font-bold
-      "
-    >
-      <div class="grid grid-flow-row bg-secondary">
-        <div
-          class="h-36px grid grid-flow-row place-content-center
-        border-b-3px border-b-solid border-b-secondaryDarker"
-        >
-          <p>{messageBox.title}</p>
-        </div>
-        <div
-          class="mx-1 px-1 py-3
-                border-b-3px border-b-solid border-b-secondaryDarker
-                bg-tertiary
-                grid grid-flow-col items-center
-                font-size-15px
-                [&_img]:(h-70px w-70px mr-10px)"
-        >
-          <img src={iconMap[messageBox.type]} alt={messageBox.type} />
-          <div>{messageBox.message}</div>
-        </div>
-        <div class="flex flex-row items-center content-center gap-1 p-1">
+    <Dialog ref={(el) => setMessageBox("dialogRef", el)}>
+      <div
+        grid={"row"}
+        bg={"secondary"}
+      >
+        <Title title={messageBox.title} />
+        <Content
+          type={messageBox.type}
+          message={messageBox.message}
+        />
+        <Controls>
           {messageBox.type === "question" ? (
             <>
-              <button
-                class="flex-1 rounded-1 h-26px
-                flex flex-row place-items-center place-content-center gap-1
-                font-bold font-size-15px"
-                onClick={async () => messageBox.close(DialogResult.Yes)}
-              >
+              <Button onClick={async () => messageBox.close(DialogResult.Yes)}>
                 Yes <Tick class="h-20px w-20px color-green" />
-              </button>
-              <button
-                class="flex-1 rounded-1 h-26px
-                flex flex-row place-items-center place-content-center gap-1
-                font-bold font-size-15px"
-                onClick={async () => messageBox.close(DialogResult.No)}
-              >
+              </Button>
+              <Button onClick={async () => messageBox.close(DialogResult.No)}>
                 No <Cross class="color-red" />
-              </button>
+              </Button>
             </>
           ) : (
-            <button
-              class="flex-1 rounded-1 h-26px
-                flex flex-row place-items-center place-content-center gap-1
-                font-bold font-size-15px"
-              onClick={async () => messageBox.close(DialogResult.OK)}
-            >
+            <Button onClick={async () => messageBox.close(DialogResult.OK)}>
               OK <Tick class="h-20px w-20px color-green" />
-            </button>
+            </Button>
           )}
-        </div>
+        </Controls>
       </div>
-    </dialog>
+    </Dialog>
   );
 };
