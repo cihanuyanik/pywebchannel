@@ -20,13 +20,15 @@ export default function Header() {
         display: "grid",
         gridAutoFlow: "row",
         placeItems: "center",
-        bgGradient: "to-b",
-        gradientFrom: "secondaryDarker",
-        gradientTo: "secondaryLighter",
+
+        bgGradient: "secondaryToBottom",
 
         fontWeight: "bolder",
         fontSize: "xx-large",
-        borderBottom: "4px solid token(colors.secondaryDarker)",
+
+        borderBottomColor: "secondaryDarker",
+        borderBottomStyle: "solid",
+        borderBottomWidth: "thick",
       })}
     >
       Todo App (#: {completedTodoCount()}/{todos.todoCount})

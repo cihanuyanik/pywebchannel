@@ -8,11 +8,11 @@ export default function TodoList() {
     <div
       class={css({
         background: "tertiary",
-        paddingX: "40px",
-        paddingY: "25px",
+        paddingX: "10",
+        paddingY: "6",
         display: "grid",
         gridAutoFlow: "row",
-        gap: "4px",
+        gap: "1",
         alignContent: "start",
         overflowY: "auto",
         scrollbarGutter: "stable both-edges",

@@ -28,7 +28,7 @@ function Status(props: { id: string }) {
       class={css({
         height: "30px",
         width: "30px",
-        marginRight: "10px",
+        marginRight: "2",
         "& svg": {
           base: {
             height: "30px",
@@ -91,19 +91,18 @@ export default function Todo(id: string) {
     <div
       class={css({
         height: "50px",
-        paddingX: "8px",
+        paddingX: "2",
         display: "grid",
         gridTemplateColumns: "auto 1fr auto",
         alignItems: "center",
-        gap: "4px",
-        borderRadius: "5px",
+        gap: "1",
+        borderRadius: "lg",
         boxShadow: "0 2px 2px token(colors.primaryDarker)",
+
         bgGradient: {
-          base: "to-r",
-          _hover: "to-l",
+          base: "secondaryToRight",
+          _hover: "secondaryToLeft",
         },
-        gradientFrom: "secondaryDarker",
-        gradientTo: "secondaryLighter",
 
         scale: {
           base: "1",

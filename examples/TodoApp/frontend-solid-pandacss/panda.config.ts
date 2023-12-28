@@ -45,6 +45,39 @@ export default defineConfig({
           text: { value: "#ffffff", description: "Text color" },
           black: { value: "#000000", description: "Black color" },
         },
+
+        gradients: {
+          secondaryToBottom: {
+            value: {
+              type: "linear",
+              placement: "to bottom",
+              stops: [
+                "token(colors.secondaryDarker)",
+                "token(colors.secondaryLighter)",
+              ],
+            },
+          },
+          secondaryToLeft: {
+            value: {
+              type: "linear",
+              placement: "to left",
+              stops: [
+                "token(colors.secondaryDarker)",
+                "token(colors.secondaryLighter)",
+              ],
+            },
+          },
+          secondaryToRight: {
+            value: {
+              type: "linear",
+              placement: "to right",
+              stops: [
+                "token(colors.secondaryDarker)",
+                "token(colors.secondaryLighter)",
+              ],
+            },
+          },
+        },
       },
     },
   },

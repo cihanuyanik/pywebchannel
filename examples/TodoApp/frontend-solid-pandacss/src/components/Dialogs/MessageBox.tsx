@@ -118,10 +118,10 @@ export const MessageBox = () => {
               <Button
                 class={css({
                   flex: "1 1 auto",
-                  rounded: "5px",
-                  height: "26px",
+                  rounded: "md",
+                  height: "7",
                   color: "green.500",
-                  gap: "5px",
+                  gap: "1",
                 })}
                 onClick={async () => messageBox.close(DialogResult.Yes)}
               >
@@ -130,10 +130,10 @@ export const MessageBox = () => {
               <Button
                 class={css({
                   flex: "1 1 auto",
-                  rounded: "5px",
-                  height: "26px",
+                  rounded: "md",
+                  height: "7",
                   color: "red.500",
-                  gap: "5px",
+                  gap: "1",
                 })}
                 onClick={async () => messageBox.close(DialogResult.No)}
               >
@@ -144,10 +144,10 @@ export const MessageBox = () => {
             <Button
               class={css({
                 flex: "1 1 auto",
-                rounded: "5px",
-                height: "26px",
+                rounded: "md",
+                height: "7",
                 color: "green.500",
-                gap: "5px",
+                gap: "1",
               })}
               onClick={async () => messageBox.close(DialogResult.OK)}
             >
