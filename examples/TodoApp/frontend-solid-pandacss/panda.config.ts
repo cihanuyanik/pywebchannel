@@ -14,6 +14,7 @@ export default defineConfig({
   theme: {
     extend: {
       tokens: {
+        // Colors
         colors: {
           primary: { value: "#4d1d83", description: "Primary color" },
           primaryLighter: {
@@ -45,7 +46,7 @@ export default defineConfig({
           text: { value: "#ffffff", description: "Text color" },
           black: { value: "#000000", description: "Black color" },
         },
-
+        // Gradients
         gradients: {
           secondaryToBottom: {
             value: {
@@ -77,6 +78,46 @@ export default defineConfig({
               ],
             },
           },
+        },
+      },
+    },
+  },
+
+  utilities: {
+    extend: {
+      bgLinGrad: {
+        values: ["string"],
+        transform: (value: string, { token }) => {
+          let [dir, from, to] = value.split(" ");
+
+          console.log(dir, from, to);
+
+          if (dir.indexOf("deg") === -1) {
+            switch (dir) {
+              case "tb":
+                dir = "to bottom";
+                break;
+              case "tt":
+                dir = "to top";
+                break;
+              case "tl":
+                dir = "to left";
+                break;
+              case "tr":
+                dir = "to right";
+                break;
+              default:
+                dir = "to bottom";
+                break;
+            }
+          }
+
+          from = token(from) || token(`colors.${from}`) || from;
+          to = token(to) || token(`colors.${to}`) || to;
+
+          return {
+            background: `linear-gradient(${dir}, ${from}, ${to})`,
+          };
         },
       },
     },

@@ -20,12 +20,10 @@ export default function Header() {
         display: "grid",
         gridAutoFlow: "row",
         placeItems: "center",
-
-        bgGradient: "secondaryToBottom",
-
+        // @ts-ignore
+        bgLinGrad: "tb secondaryDarker secondaryLighter",
         fontWeight: "bolder",
         fontSize: "xx-large",
-
         borderBottomColor: "secondaryDarker",
         borderBottomStyle: "solid",
         borderBottomWidth: "thick",

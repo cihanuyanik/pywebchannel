@@ -99,9 +99,10 @@ export default function Todo(id: string) {
         borderRadius: "lg",
         boxShadow: "0 2px 2px token(colors.primaryDarker)",
 
-        bgGradient: {
-          base: "secondaryToRight",
-          _hover: "secondaryToLeft",
+        // @ts-ignore
+        bgLinGrad: {
+          base: "tr secondaryDarker secondaryLighter",
+          _hover: "tl secondaryDarker secondaryLighter",
         },
 
         scale: {
