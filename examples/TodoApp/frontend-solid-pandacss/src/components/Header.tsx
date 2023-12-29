@@ -24,9 +24,7 @@ export default function Header() {
       fontWeight={"bolder"}
       fontSize={"xx-large"}
     >
-      <p>
-        Todo App (#: {completedTodoCount()}/{todos.todoCount})
-      </p>
+      Todo App (#: {completedTodoCount()}/{todos.todoCount})
     </HStack>
   );
 }

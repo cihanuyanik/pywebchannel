@@ -6,7 +6,7 @@ import CheckMarkDone from "./icons/CheckMarkDone";
 import { messageBox } from "./Dialogs/MessageBox";
 import { Button } from "./Button";
 import { css } from "../../styled-system/css";
-import { HStack } from "../../styled-system/jsx";
+import { Box, HStack } from "../../styled-system/jsx";
 
 function Status(props: { id: string }) {
   const onCompletedChanged = async () => {
@@ -24,45 +24,37 @@ function Status(props: { id: string }) {
     }
   };
 
+  const svgStyle = css({
+    height: "30px",
+    width: "30px",
+    transition: "color 150ms ease-in-out",
+
+    _hover: {
+      color: "tertiary",
+    },
+  });
+
   return (
-    <div
-      class={css({
-        height: "30px",
-        width: "30px",
-        marginRight: "2",
-        "& svg": {
-          base: {
-            height: "30px",
-            width: "30px",
-          },
-          _hover: {
-            color: "tertiary",
-          },
-        },
-      })}
-      onClick={onCompletedChanged}
-    >
+    <Box height={30} width={30} mr={2} onClick={onCompletedChanged}>
       {todos.entities[props.id].completed ? (
-        <CheckMarkDone h={"30px"} w={"30px"} color={"green"} />
+        <CheckMarkDone class={svgStyle} h={"30px"} w={"30px"} color={"green"} />
       ) : (
-        <Circle />
+        <Circle class={svgStyle} />
       )}
-    </div>
+    </Box>
   );
 }
 
 function Text(props: { id: string }) {
   return (
-    <span
-      class={css({
-        flex: "1",
-        textDecoration: todos.entities[props.id].completed
-          ? "line-through"
-          : "none",
-      })}
+    <Box
+      flex={1}
+      textDecoration={
+        todos.entities[props.id].completed ? "line-through" : "none"
+      }
     >
       {todos.entities[props.id].text}
-    </span>
+    </Box>
   );
 }
 
