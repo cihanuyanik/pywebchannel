@@ -5,6 +5,7 @@ import InfoImage from "/src/assets/info.png";
 import SuccessImage from "/src/assets/success.png";
 import QuestionImage from "/src/assets/question.png";
 import { css } from "../../../styled-system/css";
+import { HStack } from "../../../styled-system/jsx";
 
 type DialogProps = {
   children?: JSX.Element | JSX.Element[];
@@ -43,18 +44,14 @@ export const Dialog = (props: DialogProps) => {
 
 export function Title(props: { title: string }) {
   return (
-    <div
-      class={css({
-        height: "36px",
-        borderBottom: "3px solid token(colors.secondaryDarker)",
-        display: "grid",
-        gridAutoFlow: "row",
-        placeContent: "center",
-        placeItems: "center",
-      })}
+    <HStack
+      height={"36px"}
+      width={"full"}
+      justify={"center"}
+      borderBottom={"3px solid token(colors.secondaryDarker)"}
     >
       <p>{props.title}</p>
-    </div>
+    </HStack>
   );
 }
 
@@ -77,44 +74,32 @@ export function Content(props: { type: DialogType; message: string }) {
   };
 
   return (
-    <div
-      class={css({
-        display: "grid",
-        gridAutoFlow: "column",
-        alignItems: "center",
-        paddingX: "1",
-        paddingY: "3",
-        marginX: "1",
-        background: "tertiary",
-        fontSize: "15px",
-        borderBottom: "3px solid token(colors.secondaryDarker)",
-
-        "& img": {
+    <HStack
+      paddingX={1}
+      paddingY={3}
+      marginX={1}
+      background={"tertiary"}
+      fontSize={"15px"}
+      borderBottom={"3px solid token(colors.secondaryDarker)"}
+    >
+      <img
+        src={iconMap[props.type]}
+        alt={props.type}
+        class={css({
           height: "70px",
           width: "70px",
           marginRight: "10px",
-        },
-      })}
-    >
-      <img src={iconMap[props.type]} alt={props.type} />
+        })}
+      />
       <div>{props.message}</div>
-    </div>
+    </HStack>
   );
 }
 
 export function Controls(props: { children: JSX.Element | JSX.Element[] }) {
   return (
-    <div
-      class={css({
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "1",
-        padding: "1",
-      })}
-    >
+    <HStack width={"full"} padding={1} gap={1}>
       {props.children}
-    </div>
+    </HStack>
   );
 }

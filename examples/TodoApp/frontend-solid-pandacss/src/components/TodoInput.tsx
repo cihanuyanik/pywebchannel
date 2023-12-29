@@ -4,6 +4,7 @@ import AddCircle from "./icons/AddCircle";
 import { messageBox } from "./Dialogs/MessageBox";
 import { css } from "../../styled-system/css";
 import { Button } from "./Button";
+import { HStack } from "../../styled-system/jsx";
 
 export default function TodoInput() {
   let input: HTMLInputElement;
@@ -32,24 +33,20 @@ export default function TodoInput() {
   }
 
   return (
-    <div
-      class={css({
-        position: "absolute",
-        top: "70px",
-        zIndex: 3,
-        width: "full",
-        height: "50px",
-        paddingX: "10",
-        display: "grid",
-        gridTemplateColumns: "1fr auto",
-        gap: "1",
-        alignItems: "center",
-      })}
+    <HStack
+      gap={1}
+      position={"absolute"}
+      top={"70px"}
+      zIndex={3}
+      width={"full"}
+      height={"50px"}
+      paddingX={"10"}
     >
       <input
         ref={input!}
         onKeyUp={onKeyUp}
         class={css({
+          flex: "1",
           color: "primary",
           background: "tertiaryLighter",
           fontWeight: "bolder",
@@ -69,6 +66,6 @@ export default function TodoInput() {
       <Button onClick={onAdd}>
         <AddCircle />
       </Button>
-    </div>
+    </HStack>
   );
 }

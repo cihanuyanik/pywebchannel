@@ -10,6 +10,9 @@ export default defineConfig({
   // Files to exclude
   exclude: [],
 
+  // Set jsx framework
+  jsxFramework: "solid",
+
   // Useful for theme customization
   theme: {
     extend: {
@@ -46,39 +49,6 @@ export default defineConfig({
           text: { value: "#ffffff", description: "Text color" },
           black: { value: "#000000", description: "Black color" },
         },
-        // Gradients
-        gradients: {
-          secondaryToBottom: {
-            value: {
-              type: "linear",
-              placement: "to bottom",
-              stops: [
-                "token(colors.secondaryDarker)",
-                "token(colors.secondaryLighter)",
-              ],
-            },
-          },
-          secondaryToLeft: {
-            value: {
-              type: "linear",
-              placement: "to left",
-              stops: [
-                "token(colors.secondaryDarker)",
-                "token(colors.secondaryLighter)",
-              ],
-            },
-          },
-          secondaryToRight: {
-            value: {
-              type: "linear",
-              placement: "to right",
-              stops: [
-                "token(colors.secondaryDarker)",
-                "token(colors.secondaryLighter)",
-              ],
-            },
-          },
-        },
       },
     },
   },
@@ -89,8 +59,6 @@ export default defineConfig({
         values: ["string"],
         transform: (value: string, { token }) => {
           let [dir, from, to] = value.split(" ");
-
-          console.log(dir, from, to);
 
           if (dir.indexOf("deg") === -1) {
             switch (dir) {

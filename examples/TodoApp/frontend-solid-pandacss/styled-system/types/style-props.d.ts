@@ -648,6 +648,7 @@ export interface SystemProperties {
 	scrollSnapMarginRight?: PropertyValue<'scrollSnapMarginRight'>
 	srOnly?: PropertyValue<'srOnly'>
 	debug?: PropertyValue<'debug'>
+	bgLinGrad?: PropertyValue<'bgLinGrad'>
 	colorPalette?: PropertyValue<'colorPalette'>
 	textStyle?: PropertyValue<'textStyle'>
 }

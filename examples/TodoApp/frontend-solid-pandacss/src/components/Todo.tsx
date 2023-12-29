@@ -6,6 +6,7 @@ import CheckMarkDone from "./icons/CheckMarkDone";
 import { messageBox } from "./Dialogs/MessageBox";
 import { Button } from "./Button";
 import { css } from "../../styled-system/css";
+import { HStack } from "../../styled-system/jsx";
 
 function Status(props: { id: string }) {
   const onCompletedChanged = async () => {
@@ -53,11 +54,12 @@ function Status(props: { id: string }) {
 function Text(props: { id: string }) {
   return (
     <span
-      class={
-        todos.entities[props.id].completed
-          ? css({ textDecoration: "line-through" })
-          : ""
-      }
+      class={css({
+        flex: "1",
+        textDecoration: todos.entities[props.id].completed
+          ? "line-through"
+          : "none",
+      })}
     >
       {todos.entities[props.id].text}
     </span>
@@ -88,34 +90,25 @@ function DeleteButton(props: { id: string }) {
 
 export default function Todo(id: string) {
   return (
-    <div
-      class={css({
-        height: "50px",
-        paddingX: "2",
-        display: "grid",
-        gridTemplateColumns: "auto 1fr auto",
-        alignItems: "center",
-        gap: "1",
-        borderRadius: "lg",
-        boxShadow: "0 2px 2px token(colors.primaryDarker)",
-
-        // @ts-ignore
-        bgLinGrad: {
-          base: "tr secondaryDarker secondaryLighter",
-          _hover: "tl secondaryDarker secondaryLighter",
-        },
-
-        scale: {
-          base: "1",
-          _hover: "1.02",
-        },
-
-        transition: "scale 150ms ease-in-out",
-      })}
+    <HStack
+      minHeight={50}
+      paddingX={2}
+      gap={1}
+      borderRadius={"lg"}
+      boxShadow={"0 2px 2px token(colors.primaryDarker)"}
+      bgLinGrad={{
+        base: "tr secondaryDarker secondaryLighter",
+        _hover: "tl secondaryDarker secondaryLighter",
+      }}
+      scale={{
+        base: "1",
+        _hover: "1.02",
+      }}
+      transition={"scale 150ms ease-in-out"}
     >
       <Status id={id} />
       <Text id={id} />
       <DeleteButton id={id} />
-    </div>
+    </HStack>
   );
 }

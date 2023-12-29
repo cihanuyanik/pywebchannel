@@ -1691,18 +1691,6 @@ const tokens = {
     "value": "#000000",
     "variable": "var(--colors-black)"
   },
-  "gradients.secondaryToBottom": {
-    "value": "linear-gradient(to bottom, token(colors.secondaryDarker), token(colors.secondaryLighter))",
-    "variable": "var(--gradients-secondary-to-bottom)"
-  },
-  "gradients.secondaryToLeft": {
-    "value": "linear-gradient(to left, token(colors.secondaryDarker), token(colors.secondaryLighter))",
-    "variable": "var(--gradients-secondary-to-left)"
-  },
-  "gradients.secondaryToRight": {
-    "value": "linear-gradient(to right, token(colors.secondaryDarker), token(colors.secondaryLighter))",
-    "variable": "var(--gradients-secondary-to-right)"
-  },
   "breakpoints.sm": {
     "value": "640px",
     "variable": "var(--breakpoints-sm)"

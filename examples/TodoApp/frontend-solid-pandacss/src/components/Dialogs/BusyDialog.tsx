@@ -3,6 +3,7 @@ import BusyDialogGif from "/src/assets/busydialog.gif";
 import { createMutator } from "../../stores/utils";
 import { Dialog } from "./Dialog";
 import { css } from "../../../styled-system/css";
+import { VStack } from "../../../styled-system/jsx";
 
 export type BusyDialogStore = {
   dialogRef: HTMLDialogElement | null;
@@ -36,20 +37,10 @@ const mutator = createMutator(setBusyDialog);
 export const BusyDialog = () => {
   return (
     <Dialog ref={(el) => setBusyDialog("dialogRef", el)}>
-      <div
-        class={css({
-          display: "grid",
-          gridAutoFlow: "row",
-          placeContent: "center",
-          placeItems: "center",
-          textAlign: "center",
-          background: "primary",
-          opacity: "70%",
-        })}
-      >
+      <VStack background={"primary"} opacity={0.7}>
         <img src={BusyDialogGif} alt={"Busy Dialog gif"} />
         <p>{busyDialog.message}</p>
-      </div>
+      </VStack>
     </Dialog>
   );
 };

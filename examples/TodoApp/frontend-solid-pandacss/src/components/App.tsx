@@ -7,8 +7,7 @@ import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 import { BusyDialog, busyDialog } from "./Dialogs/BusyDialog";
 import { MessageBox, messageBox } from "./Dialogs/MessageBox";
-import { css } from "../../styled-system/css";
-import { flex, grid } from "../../styled-system/patterns";
+import { VStack } from "../../styled-system/jsx";
 
 export default function App() {
   onMount(async () => {
@@ -30,20 +29,12 @@ export default function App() {
   });
 
   return (
-    <div
-      class={css({
-        height: "screen",
-        display: "grid",
-        gridTemplateRows: "auto 1fr",
-        position: "relative",
-        color: "text",
-      })}
-    >
+    <VStack alignItems={"stretch"} gap={0} height={"screen"} color={"text"}>
       <Header />
       <TodoInput />
       <TodoList />
       <BusyDialog />
       <MessageBox />
-    </div>
+    </VStack>
   );
 }

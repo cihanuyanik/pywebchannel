@@ -12,6 +12,7 @@ import {
 } from "./Dialog";
 import { css } from "../../../styled-system/css";
 import { Button } from "../Button";
+import { VStack } from "../../../styled-system/jsx";
 
 export type MessageBoxStore = {
   dialogRef: HTMLDialogElement | null;
@@ -103,13 +104,7 @@ const mutate = createMutator(setMessageBox);
 export const MessageBox = () => {
   return (
     <Dialog ref={(el) => setMessageBox("dialogRef", el)}>
-      <div
-        class={css({
-          display: "grid",
-          gridAutoFlow: "row",
-          background: "secondary",
-        })}
-      >
+      <VStack gap={0} background={"secondary"}>
         <Title title={messageBox.title} />
         <Content type={messageBox.type} message={messageBox.message} />
         <Controls>
@@ -155,7 +150,7 @@ export const MessageBox = () => {
             </Button>
           )}
         </Controls>
-      </div>
+      </VStack>
     </Dialog>
   );
 };

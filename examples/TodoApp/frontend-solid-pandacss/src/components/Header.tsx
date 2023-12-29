@@ -1,6 +1,6 @@
 import { todos } from "../stores/todoStore";
 import { createMemo } from "solid-js";
-import { css } from "../../styled-system/css";
+import { HStack } from "../../styled-system/jsx";
 
 export default function Header() {
   const completedTodoCount = createMemo(() => {
@@ -14,22 +14,19 @@ export default function Header() {
   });
 
   return (
-    <div
-      class={css({
-        height: "100px",
-        display: "grid",
-        gridAutoFlow: "row",
-        placeItems: "center",
-        // @ts-ignore
-        bgLinGrad: "tb secondaryDarker secondaryLighter",
-        fontWeight: "bolder",
-        fontSize: "xx-large",
-        borderBottomColor: "secondaryDarker",
-        borderBottomStyle: "solid",
-        borderBottomWidth: "thick",
-      })}
+    <HStack
+      height={"100px"}
+      justify={"center"}
+      bgLinGrad={"tb secondaryDarker secondaryLighter"}
+      borderBottomColor={"secondaryDarker"}
+      borderBottomStyle={"solid"}
+      borderBottomWidth={"thick"}
+      fontWeight={"bolder"}
+      fontSize={"xx-large"}
     >
-      Todo App (#: {completedTodoCount()}/{todos.todoCount})
-    </div>
+      <p>
+        Todo App (#: {completedTodoCount()}/{todos.todoCount})
+      </p>
+    </HStack>
   );
 }
