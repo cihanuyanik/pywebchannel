@@ -209,7 +209,7 @@ interface PropertyValueTypes {
 	strokeWidth: Tokens["borderWidths"];
 	srOnly: boolean;
 	debug: boolean;
-	bgLinGrad: "string";
+	bgLinGrad: string;
 	colorPalette: "current" | "white" | "transparent" | "rose" | "pink" | "fuchsia" | "purple" | "violet" | "indigo" | "blue" | "sky" | "cyan" | "teal" | "emerald" | "green" | "lime" | "yellow" | "amber" | "orange" | "red" | "neutral" | "stone" | "zinc" | "gray" | "slate" | "primary" | "primaryLighter" | "primaryDarker" | "secondary" | "secondaryLighter" | "secondaryDarker" | "tertiary" | "tertiaryLighter" | "tertiaryDarker" | "text" | "black";
 	textStyle: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl";
 }

@@ -1,7 +1,7 @@
 import { createStore } from "solid-js/store";
-import { Tick } from "../icons/Tick";
-import { Cross } from "../icons/Cross";
 import { createMutator } from "../../stores/utils";
+import { css } from "../../../panda-css/css";
+import { FlexColumn } from "../../../panda-css/jsx";
 import {
   Content,
   Controls,
@@ -10,9 +10,9 @@ import {
   DialogType,
   Title,
 } from "./Dialog";
-import { css } from "../../../styled-system/css";
 import { Button } from "../Button";
-import { VStack } from "../../../styled-system/jsx";
+import { Tick } from "../icons/Tick";
+import { Cross } from "../icons/Cross";
 
 export type MessageBoxStore = {
   dialogRef: HTMLDialogElement | null;
@@ -104,7 +104,7 @@ const mutate = createMutator(setMessageBox);
 export const MessageBox = () => {
   return (
     <Dialog ref={(el) => setMessageBox("dialogRef", el)}>
-      <VStack gap={0} background={"secondary"}>
+      <FlexColumn background={"secondary"}>
         <Title title={messageBox.title} />
         <Content type={messageBox.type} message={messageBox.message} />
         <Controls>
@@ -150,7 +150,7 @@ export const MessageBox = () => {
             </Button>
           )}
         </Controls>
-      </VStack>
+      </FlexColumn>
     </Dialog>
   );
 };

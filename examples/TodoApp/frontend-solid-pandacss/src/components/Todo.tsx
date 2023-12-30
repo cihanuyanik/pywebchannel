@@ -5,8 +5,8 @@ import Circle from "./icons/Circle";
 import CheckMarkDone from "./icons/CheckMarkDone";
 import { messageBox } from "./Dialogs/MessageBox";
 import { Button } from "./Button";
-import { css } from "../../styled-system/css";
-import { Box, HStack } from "../../styled-system/jsx";
+import { css } from "../../panda-css/css";
+import { Box, FlexRow } from "../../panda-css/jsx";
 
 function Status(props: { id: string }) {
   const onCompletedChanged = async () => {
@@ -82,7 +82,8 @@ function DeleteButton(props: { id: string }) {
 
 export default function Todo(id: string) {
   return (
-    <HStack
+    <FlexRow
+      marginBottom={1}
       minHeight={50}
       paddingX={2}
       gap={1}
@@ -101,6 +102,6 @@ export default function Todo(id: string) {
       <Status id={id} />
       <Text id={id} />
       <DeleteButton id={id} />
-    </HStack>
+    </FlexRow>
   );
 }

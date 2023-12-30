@@ -1,5 +1,5 @@
 import { JSX } from "solid-js";
-import { css } from "../../styled-system/css";
+import { css } from "../../panda-css/css";
 
 export function Button(props: {
   onClick: () => void;

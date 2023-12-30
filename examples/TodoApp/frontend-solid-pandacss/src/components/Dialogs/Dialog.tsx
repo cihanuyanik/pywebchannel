@@ -4,8 +4,8 @@ import WarningImage from "/src/assets/warning.png";
 import InfoImage from "/src/assets/info.png";
 import SuccessImage from "/src/assets/success.png";
 import QuestionImage from "/src/assets/question.png";
-import { css } from "../../../styled-system/css";
-import { HStack } from "../../../styled-system/jsx";
+import { Center, FlexRow } from "../../../panda-css/jsx";
+import { float } from "../../../panda-css/patterns";
 
 type DialogProps = {
   children?: JSX.Element | JSX.Element[];
@@ -16,16 +16,14 @@ export const Dialog = (props: DialogProps) => {
   return (
     <dialog
       ref={props.ref}
-      class={css({
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        zIndex: "9999",
-        transform: "translate(-50%, -50%)",
+      class={float({
+        placement: "middle-center",
         width: "400px",
+
         outline: "none",
         border: "none",
         rounded: "xl",
+        display: "hidden",
 
         color: "text",
         background: "transparent",
@@ -44,14 +42,9 @@ export const Dialog = (props: DialogProps) => {
 
 export function Title(props: { title: string }) {
   return (
-    <HStack
-      height={"36px"}
-      width={"full"}
-      justify={"center"}
-      borderBottom={"3px solid token(colors.secondaryDarker)"}
-    >
+    <Center height={"36px"} width={"full"}>
       <p>{props.title}</p>
-    </HStack>
+    </Center>
   );
 }
 
@@ -59,7 +52,6 @@ export type DialogType = "error" | "warning" | "info" | "success" | "question";
 
 export enum DialogResult {
   OK = "OK",
-  Cancel = "Cancel",
   Yes = "Yes",
   No = "No",
 }
@@ -74,32 +66,31 @@ export function Content(props: { type: DialogType; message: string }) {
   };
 
   return (
-    <HStack
+    <FlexRow
+      gap={2}
+      justify={"stretch"}
+      width={"full"}
       paddingX={1}
       paddingY={3}
-      marginX={1}
       background={"tertiary"}
-      fontSize={"15px"}
-      borderBottom={"3px solid token(colors.secondaryDarker)"}
+      fontSize={"medium"}
+      border={"3px solid token(colors.secondaryDarker)"}
     >
       <img
         src={iconMap[props.type]}
         alt={props.type}
-        class={css({
-          height: "70px",
-          width: "70px",
-          marginRight: "10px",
-        })}
+        height={"70px"}
+        width={"70px"}
       />
-      <div>{props.message}</div>
-    </HStack>
+      <p>{props.message}</p>
+    </FlexRow>
   );
 }
 
 export function Controls(props: { children: JSX.Element | JSX.Element[] }) {
   return (
-    <HStack width={"full"} padding={1} gap={1}>
+    <FlexRow width={"full"} padding={1} gap={1}>
       {props.children}
-    </HStack>
+    </FlexRow>
   );
 }

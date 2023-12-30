@@ -2,8 +2,7 @@ import { createStore } from "solid-js/store";
 import BusyDialogGif from "/src/assets/busydialog.gif";
 import { createMutator } from "../../stores/utils";
 import { Dialog } from "./Dialog";
-import { css } from "../../../styled-system/css";
-import { VStack } from "../../../styled-system/jsx";
+import { FlexColumn } from "../../../panda-css/jsx";
 
 export type BusyDialogStore = {
   dialogRef: HTMLDialogElement | null;
@@ -37,10 +36,10 @@ const mutator = createMutator(setBusyDialog);
 export const BusyDialog = () => {
   return (
     <Dialog ref={(el) => setBusyDialog("dialogRef", el)}>
-      <VStack background={"primary"} opacity={0.7}>
+      <FlexColumn background={"primary"} opacity={0.7}>
         <img src={BusyDialogGif} alt={"Busy Dialog gif"} />
         <p>{busyDialog.message}</p>
-      </VStack>
+      </FlexColumn>
     </Dialog>
   );
 };

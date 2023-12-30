@@ -1,6 +1,6 @@
 import { todos } from "../stores/todoStore";
 import { createMemo } from "solid-js";
-import { HStack } from "../../styled-system/jsx";
+import { Center } from "../../panda-css/jsx";
 
 export default function Header() {
   const completedTodoCount = createMemo(() => {
@@ -14,17 +14,15 @@ export default function Header() {
   });
 
   return (
-    <HStack
+    <Center
       height={"100px"}
-      justify={"center"}
       bgLinGrad={"tb secondaryDarker secondaryLighter"}
-      borderBottomColor={"secondaryDarker"}
-      borderBottomStyle={"solid"}
-      borderBottomWidth={"thick"}
+      zIndex={0}
       fontWeight={"bolder"}
       fontSize={"xx-large"}
+      boxShadow={"2px 5px 10px token(colors.primaryDarker)"}
     >
       Todo App (#: {completedTodoCount()}/{todos.todoCount})
-    </HStack>
+    </Center>
   );
 }

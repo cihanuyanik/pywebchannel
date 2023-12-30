@@ -2,9 +2,9 @@ import { API } from "../api/CommandAPI";
 import { v4 as uuidv4 } from "uuid";
 import AddCircle from "./icons/AddCircle";
 import { messageBox } from "./Dialogs/MessageBox";
-import { css } from "../../styled-system/css";
+import { css } from "../../panda-css/css";
+import { Float } from "../../panda-css/jsx";
 import { Button } from "./Button";
-import { HStack } from "../../styled-system/jsx";
 
 export default function TodoInput() {
   let input: HTMLInputElement;
@@ -33,11 +33,10 @@ export default function TodoInput() {
   }
 
   return (
-    <HStack
+    <Float
+      placement={"top-center"}
+      top={"100px"}
       gap={1}
-      position={"absolute"}
-      top={"70px"}
-      zIndex={3}
       width={"full"}
       height={"50px"}
       paddingX={"10"}
@@ -66,6 +65,6 @@ export default function TodoInput() {
       <Button onClick={onAdd}>
         <AddCircle />
       </Button>
-    </HStack>
+    </Float>
   );
 }

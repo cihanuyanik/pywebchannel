@@ -1,21 +1,19 @@
 import { todos } from "../stores/todoStore";
 import { For } from "solid-js";
 import Todo from "./Todo";
-import { VStack } from "../../styled-system/jsx";
+import { Scrollable } from "../../panda-css/jsx";
 
 export default function TodoList() {
   return (
-    <VStack
-      flex={"1"}
-      alignItems={"stretch"}
-      gap={1}
+    <Scrollable
+      direction={"vertical"}
+      hideScrollbar={true}
       background={"tertiary"}
+      flex={"1"}
       paddingX={10}
       paddingY={6}
-      overflowY={"auto"}
-      scrollbarGutter={"stable both-edges"}
     >
       <For each={todos.ids} children={Todo} />
-    </VStack>
+    </Scrollable>
   );
 }

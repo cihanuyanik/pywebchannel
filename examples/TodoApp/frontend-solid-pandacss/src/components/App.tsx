@@ -7,7 +7,7 @@ import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 import { BusyDialog, busyDialog } from "./Dialogs/BusyDialog";
 import { MessageBox, messageBox } from "./Dialogs/MessageBox";
-import { VStack } from "../../styled-system/jsx";
+import { FlexColumn } from "../../panda-css/jsx";
 
 export default function App() {
   onMount(async () => {
@@ -29,12 +29,12 @@ export default function App() {
   });
 
   return (
-    <VStack alignItems={"stretch"} gap={0} height={"screen"} color={"text"}>
+    <FlexColumn align={"stretch"} height={"screen"} color={"text"}>
       <Header />
       <TodoInput />
       <TodoList />
       <BusyDialog />
       <MessageBox />
-    </VStack>
+    </FlexColumn>
   );
 }

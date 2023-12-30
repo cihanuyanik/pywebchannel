@@ -1,3 +1,5 @@
+export * from './factory.mjs';
+export * from './is-valid-prop.mjs';
 export * from './box.mjs';
 export * from './flex.mjs';
 export * from './stack.mjs';
@@ -18,3 +20,6 @@ export * from './divider.mjs';
 export * from './float.mjs';
 export * from './bleed.mjs';
 export * from './visually-hidden.mjs';
+export * from './scrollable.mjs';
+export * from './flex-row.mjs';
+export * from './flex-column.mjs';
