@@ -42,14 +42,10 @@ const colorTokens = defineTokens({
 const scrollable = definePattern({
   description: "A container that allows for scrolling",
   properties: {
-    // The direction of the scroll
     direction: { type: "enum", value: ["horizontal", "vertical"] },
-    // Whether to hide the scrollbar
     hideScrollbar: { type: "boolean" },
   },
-  // jsxName: "Scrollable",
 
-  // disallow the `overflow` property (in TypeScript)
   blocklist: ["overflow"],
   transform(props) {
     const { direction, hideScrollbar, ...rest } = props;
@@ -71,11 +67,8 @@ const scrollable = definePattern({
 const flexRow = definePattern({
   description: "A flex container that aligns items horizontally",
   properties: {
-    // Whether to reverse the order of the items
     reverse: { type: "boolean" },
-    // Whether to wrap the items
     wrap: { type: "boolean" },
-    // How to align the items horizontally
     align: {
       type: "enum",
       value: [
@@ -97,7 +90,6 @@ const flexRow = definePattern({
         "normal",
       ],
     },
-    // How to align the items vertically
     justify: {
       type: "enum",
       value: [
@@ -117,8 +109,6 @@ const flexRow = definePattern({
     },
   },
   jsxName: "FlexRow",
-
-  // disallow the `display` property (in TypeScript)
   blocklist: ["display"],
   transform(props) {
     const { reverse, wrap, align, justify, ...rest } = props;
@@ -136,11 +126,8 @@ const flexRow = definePattern({
 const flexColumn = definePattern({
   description: "A flex container that aligns items vertically",
   properties: {
-    // Whether to reverse the order of the items
     reverse: { type: "boolean" },
-    // Whether to wrap the items
     wrap: { type: "boolean" },
-    // How to align the items horizontally
     align: {
       type: "enum",
       value: [
@@ -162,7 +149,6 @@ const flexColumn = definePattern({
         "normal",
       ],
     },
-    // How to align the items vertically
     justify: {
       type: "enum",
       value: [
@@ -183,7 +169,6 @@ const flexColumn = definePattern({
   },
   jsxName: "FlexColumn",
 
-  // disallow the `display` property (in TypeScript)
   blocklist: ["display"],
   transform(props) {
     const { reverse, wrap, align, justify, ...rest } = props;
@@ -199,19 +184,6 @@ const flexColumn = definePattern({
 });
 
 const bgLinGrad = defineUtility({
-  /**
-   * Background linear gradient property utility
-   *
-   * @Params: <direction> <color_from> <color_to>
-   *   direction: tb, tt, tl, tr, or deg
-   *   color_from: color name or hex code
-   *   color_to: color name or hex code
-   *
-   * @Examples:
-   *    bgLinGrad: "tb red green" --> translates to: background: "linear-gradient(to bottom, red, green)"
-   *    bgLinGrad: 90deg primary secondary --> translates to: background: "linear-gradient(90deg, token(colors.primary), token(colors.secondary))"
-   *    bgLinGrad: tl #ff0000 #00ff00 --> translates to: background: "linear-gradient(to left, #ff0000, #00ff00)"
-   */
   values: {
     type: "string",
   },
@@ -285,6 +257,5 @@ export default defineConfig({
   },
 
   // The output directory for your css system
-  // cwd: "src",
   outdir: "panda-css",
 });

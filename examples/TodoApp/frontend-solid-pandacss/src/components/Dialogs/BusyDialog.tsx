@@ -33,7 +33,7 @@ export const [busyDialog, setBusyDialog] = createStore<BusyDialogStore>({
 
 const mutator = createMutator(setBusyDialog);
 
-export const BusyDialog = () => {
+export default function BusyDialog() {
   return (
     <Dialog ref={(el) => setBusyDialog("dialogRef", el)}>
       <FlexColumn background={"primary"} opacity={0.7}>
@@ -42,4 +42,4 @@ export const BusyDialog = () => {
       </FlexColumn>
     </Dialog>
   );
-};
+}

@@ -101,7 +101,7 @@ export const [messageBox, setMessageBox] = createStore<MessageBoxStore>({
 
 const mutate = createMutator(setMessageBox);
 
-export const MessageBox = () => {
+export default function MessageBox() {
   return (
     <Dialog ref={(el) => setMessageBox("dialogRef", el)}>
       <FlexColumn background={"secondary"}>
@@ -153,4 +153,4 @@ export const MessageBox = () => {
       </FlexColumn>
     </Dialog>
   );
-};
+}
