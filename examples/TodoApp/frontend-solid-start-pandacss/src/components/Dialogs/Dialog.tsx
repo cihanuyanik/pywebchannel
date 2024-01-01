@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX, onMount } from "solid-js";
 import ErrorImage from "/src/assets/error.png";
 import WarningImage from "/src/assets/warning.png";
 import InfoImage from "/src/assets/info.png";
@@ -8,15 +8,49 @@ import { Center, FlexRow } from "../../../panda-css/jsx";
 import { float } from "../../../panda-css/patterns";
 import { DialogType } from "~/stores/messageBoxStore";
 
+export type DialogRef = {
+  showModal: () => void;
+  close: () => void;
+  addEventListener: (event: string, callback: () => void) => void;
+  removeEventListener: (event: string, callback: () => void) => void;
+};
+
 type DialogProps = {
   children?: JSX.Element | JSX.Element[];
-  ref?: (el: HTMLDialogElement) => void;
+  ref?: (el: DialogRef) => void;
 };
 
 export const Dialog = (props: DialogProps) => {
+  let dialogRef: HTMLDialogElement;
+
+  onMount(() => {
+    const dialogHandler: DialogRef = {
+      showModal() {
+        dialogRef.showModal();
+        dialogRef.animate([{ opacity: 0 }, { opacity: 1 }], {
+          duration: 250,
+        });
+      },
+      close() {
+        dialogRef.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 250,
+        }).onfinish = () => {
+          dialogRef.close();
+        };
+      },
+      addEventListener(event: string, callback: () => void) {
+        dialogRef.addEventListener(event, callback);
+      },
+      removeEventListener(event: string, callback: () => void) {
+        dialogRef.removeEventListener(event, callback);
+      },
+    };
+    props.ref?.(dialogHandler);
+  });
+
   return (
     <dialog
-      ref={props.ref}
+      ref={dialogRef!}
       class={float({
         placement: "middle-center",
         width: "400px",

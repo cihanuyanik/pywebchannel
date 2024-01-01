@@ -18,15 +18,18 @@ import { messageBox } from "~/stores/messageBoxStore";
 export default function Home() {
   onMount(async () => {
     if (isServer) return;
-    try {
-      busyDialog.show("Connecting to server...");
-      await API.connect();
-      await todos.setupConnections();
-      busyDialog.close();
-    } catch (error) {
-      busyDialog.close();
-      messageBox.error(`${error}`);
-    }
+    // Delayed execution to allow the UI to render completed
+    setTimeout(async () => {
+      try {
+        busyDialog.show("Connecting to server...");
+        await API.connect();
+        await todos.setupConnections();
+        busyDialog.close();
+      } catch (error) {
+        busyDialog.close();
+        messageBox.error(`${error}`);
+      }
+    }, 100);
   });
 
   onCleanup(() => {

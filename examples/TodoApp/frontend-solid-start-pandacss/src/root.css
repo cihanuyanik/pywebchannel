@@ -8,3 +8,17 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
+
+.todo-item {
+  transition: all 250ms ease-in-out;
+}
+
+.todo-item-enter {
+  opacity: 1;
+  transform: translateX(-100%);
+}
+.todo-item-exit-to {
+  opacity: 0;
+  transform: translateX(100%);
+}

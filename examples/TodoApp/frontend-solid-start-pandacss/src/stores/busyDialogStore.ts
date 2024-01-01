@@ -1,9 +1,10 @@
 import { createStore } from "solid-js/store";
 import { createMutator } from "~/stores/utils";
 import { createRoot } from "solid-js";
+import { DialogRef } from "~/components/Dialogs/Dialog";
 
 export type BusyDialogStore = {
-  dialogRef: HTMLDialogElement | null;
+  dialogRef: DialogRef | null;
   message: string;
   isOpen: boolean;
   show: (message: string) => void;

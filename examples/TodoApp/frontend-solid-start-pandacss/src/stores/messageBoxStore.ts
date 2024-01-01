@@ -1,6 +1,7 @@
 import { createStore } from "solid-js/store";
 import { createMutator } from "~/stores/utils";
 import { createRoot } from "solid-js";
+import { DialogRef } from "~/components/Dialogs/Dialog";
 
 export type DialogType = "error" | "warning" | "info" | "success" | "question";
 
@@ -11,7 +12,7 @@ export enum DialogResult {
 }
 
 export type MessageBoxStore = {
-  dialogRef: HTMLDialogElement | null;
+  dialogRef: DialogRef | null;
   type: DialogType;
   title: string;
   message: string;

@@ -2,6 +2,7 @@ import { todos } from "~/stores/todoStore";
 import { For } from "solid-js";
 import Todo from "./Todo";
 import { Scrollable } from "../../panda-css/jsx";
+import { TransitionGroup } from "solid-transition-group";
 
 export default function TodoList() {
   return (
@@ -13,7 +14,9 @@ export default function TodoList() {
       paddingX={10}
       paddingY={6}
     >
-      <For each={todos.ids} children={Todo} />
+      <TransitionGroup name={"todo-item"}>
+        <For each={todos.ids} children={Todo} />
+      </TransitionGroup>
     </Scrollable>
   );
 }

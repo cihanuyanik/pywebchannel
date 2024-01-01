@@ -7,6 +7,7 @@ import { Button } from "./Button";
 import { css } from "../../panda-css/css";
 import { Box, FlexRow } from "../../panda-css/jsx";
 import { messageBox } from "~/stores/messageBoxStore";
+import { defineGlobalStyles } from "@pandacss/dev";
 
 function Status(props: { id: string }) {
   const onCompletedChanged = async () => {
@@ -68,7 +69,10 @@ function DeleteButton(props: { id: string }) {
       if (dialogResult === "No") return;
 
       const response = await API.TodoController.remove(props.id);
-      if (response.error) throw new Error(response.error);
+      if (response.error) {
+        // noinspection ExceptionCaughtLocallyJS
+        throw new Error(response.error);
+      }
     } catch (e) {
       messageBox.error(`${e}`);
     }
@@ -82,8 +86,10 @@ function DeleteButton(props: { id: string }) {
 }
 
 export default function Todo(id: string) {
+  console.log("rendering todo ", id);
   return (
     <FlexRow
+      class={"todo-item"}
       marginBottom={1}
       minHeight={50}
       paddingX={2}
@@ -98,7 +104,6 @@ export default function Todo(id: string) {
         base: "1",
         _hover: "1.02",
       }}
-      transition={"scale 150ms ease-in-out"}
     >
       <Status id={id} />
       <Text id={id} />
