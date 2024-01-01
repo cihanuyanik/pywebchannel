@@ -27,6 +27,7 @@ export const Dialog = (props: DialogProps) => {
     const dialogHandler: DialogRef = {
       showModal() {
         dialogRef.showModal();
+
         dialogRef.animate([{ opacity: 0 }, { opacity: 1 }], {
           duration: 250,
         });
@@ -54,7 +55,6 @@ export const Dialog = (props: DialogProps) => {
       class={float({
         placement: "middle-center",
         width: "400px",
-
         outline: "none",
         border: "none",
         rounded: "xl",
