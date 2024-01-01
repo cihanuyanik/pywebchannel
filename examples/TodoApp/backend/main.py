@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     # Create http server and start it
     UI_PORT = 12000
-    httpServer = HttpServer("app_ui_solid_pandacss", UI_PORT, app)
+    httpServer = HttpServer("app_ui_solidstart_pandacss", UI_PORT, app)
     httpServer.start()
 
     # Website on QTGui

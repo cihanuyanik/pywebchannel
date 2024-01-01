@@ -1,0 +1,32 @@
+{
+  "name": "todo-app",
+  "scripts": {
+    "prepare": "panda codegen",
+    "dev": "solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@pandacss/dev": "^0.23.0",
+    "@types/node": "^18.17.5",
+    "@types/uuid": "^9.0.7",
+    "esbuild": "^0.14.54",
+    "postcss": "^8.4.28",
+    "prettier": "3.1.0",
+    "solid-start-node": "^0.3.10",
+    "typescript": "^5.1.3",
+    "vite": "^4.4.9"
+  },
+  "dependencies": {
+    "@solidjs/meta": "^0.29.1",
+    "@solidjs/router": "^0.8.3",
+    "solid-js": "^1.8.5",
+    "solid-start": "^0.3.10",
+    "solid-start-static": "^0.3.10",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "src/assets/busydialog.gif": {
+    "file": "assets/busydialog-bdc5495d.gif",
+    "src": "src/assets/busydialog.gif"
+  },
+  "src/assets/error.png": {
+    "file": "assets/error-8eecde2f.png",
+    "src": "src/assets/error.png"
+  },
+  "src/assets/info.png": {
+    "file": "assets/info-fbebc796.png",
+    "src": "src/assets/info.png"
+  },
+  "src/assets/question.png": {
+    "file": "assets/question-be7c215c.png",
+    "src": "src/assets/question.png"
+  },
+  "src/assets/success.png": {
+    "file": "assets/success-7c3db2fd.png",
+    "src": "src/assets/success.png"
+  },
+  "src/assets/warning.png": {
+    "file": "assets/warning-35956774.png",
+    "src": "src/assets/warning.png"
+  },
+  "src/entry-client.css": {
+    "file": "assets/entry-client-101690e6.css",
+    "src": "src/entry-client.css"
+  },
+  "src/entry-client.tsx": {
+    "css": [
+      "assets/entry-client-101690e6.css"
+    ],
+    "dynamicImports": [
+      "src/routes/index.tsx"
+    ],
+    "file": "assets/entry-client-24029748.js",
+    "isEntry": true,
+    "src": "src/entry-client.tsx"
+  },
+  "src/routes/index.tsx": {
+    "assets": [
+      "assets/busydialog-bdc5495d.gif",
+      "assets/error-8eecde2f.png",
+      "assets/warning-35956774.png",
+      "assets/info-fbebc796.png",
+      "assets/success-7c3db2fd.png",
+      "assets/question-be7c215c.png"
+    ],
+    "file": "assets/index-a0582002.js",
+    "imports": [
+      "src/entry-client.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/index.tsx"
+  }
+}

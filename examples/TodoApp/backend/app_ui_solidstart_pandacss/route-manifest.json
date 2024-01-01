@@ -1,0 +1,68 @@
+{
+  "/": {
+    "type": "route",
+    "script": {
+      "type": "script",
+      "href": "/assets/index-a0582002.js"
+    },
+    "assets": [
+      {
+        "type": "script",
+        "href": "/assets/index-a0582002.js"
+      },
+      {
+        "type": "script",
+        "href": "/assets/entry-client-24029748.js"
+      },
+      {
+        "type": "style",
+        "href": "/assets/entry-client-101690e6.css"
+      },
+      {
+        "type": "asset",
+        "href": "/assets/busydialog-bdc5495d.gif"
+      },
+      {
+        "type": "asset",
+        "href": "/assets/error-8eecde2f.png"
+      },
+      {
+        "type": "asset",
+        "href": "/assets/warning-35956774.png"
+      },
+      {
+        "type": "asset",
+        "href": "/assets/info-fbebc796.png"
+      },
+      {
+        "type": "asset",
+        "href": "/assets/success-7c3db2fd.png"
+      },
+      {
+        "type": "asset",
+        "href": "/assets/question-be7c215c.png"
+      }
+    ]
+  },
+  "entry-client": {
+    "type": "entry",
+    "script": {
+      "type": "script",
+      "href": "/assets/entry-client-24029748.js"
+    },
+    "assets": [
+      {
+        "type": "script",
+        "href": "/assets/entry-client-24029748.js"
+      },
+      {
+        "type": "style",
+        "href": "/assets/entry-client-101690e6.css"
+      }
+    ]
+  },
+  "index.html": {
+    "type": "entry",
+    "assets": []
+  }
+}
