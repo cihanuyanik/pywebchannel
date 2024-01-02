@@ -7,7 +7,6 @@ import { Button } from "./Button";
 import { css } from "../../panda-css/css";
 import { Box, FlexRow } from "../../panda-css/jsx";
 import { messageBox } from "~/stores/messageBoxStore";
-import { defineGlobalStyles } from "@pandacss/dev";
 
 function Status(props: { id: string }) {
   const onCompletedChanged = async () => {
@@ -86,7 +85,6 @@ function DeleteButton(props: { id: string }) {
 }
 
 export default function Todo(id: string) {
-  console.log("rendering todo ", id);
   return (
     <FlexRow
       class={"todo-item"}

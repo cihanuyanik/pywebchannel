@@ -24,17 +24,17 @@
     "src": "src/assets/warning.png"
   },
   "src/entry-client.css": {
-    "file": "assets/entry-client-117c32d7.css",
+    "file": "assets/entry-client-1fe31b5f.css",
     "src": "src/entry-client.css"
   },
   "src/entry-client.tsx": {
     "css": [
-      "assets/entry-client-117c32d7.css"
+      "assets/entry-client-1fe31b5f.css"
     ],
     "dynamicImports": [
       "src/routes/index.tsx"
     ],
-    "file": "assets/entry-client-933a1e2e.js",
+    "file": "assets/entry-client-7b6e17fd.js",
     "isEntry": true,
     "src": "src/entry-client.tsx"
   },
@@ -47,7 +47,7 @@
       "assets/success-7c3db2fd.png",
       "assets/question-be7c215c.png"
     ],
-    "file": "assets/index-491af75a.js",
+    "file": "assets/index-a24bbb9d.js",
     "imports": [
       "src/entry-client.tsx"
     ],

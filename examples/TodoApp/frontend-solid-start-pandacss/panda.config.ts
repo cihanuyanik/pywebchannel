@@ -1,10 +1,12 @@
-import { defineConfig, definePattern, defineUtility } from "@pandacss/dev";
+import { defineConfig } from "@pandacss/dev";
 import { colorTokens } from "./panda-css-config/colorTokens";
 import { scrollable } from "./panda-css-config/scrollable";
 import { flexRow } from "./panda-css-config/flexRow";
 import { flexColumn } from "./panda-css-config/flexColumn";
 import { bgLinGrad } from "./panda-css-config/bgLinGrad";
+import { bodyCss, todoItemCss } from "./panda-css-config/globalCssDefinitions";
 
+// noinspection SpellCheckingInspection
 export default defineConfig({
   // Whether to use css reset
   preflight: true,
@@ -18,14 +20,6 @@ export default defineConfig({
   // Set jsx framework
   jsxFramework: "solid",
 
-  patterns: {
-    extend: {
-      scrollable,
-      flexRow,
-      flexColumn,
-    },
-  },
-
   // Useful for theme customization
   theme: {
     extend: {
@@ -35,9 +29,27 @@ export default defineConfig({
     },
   },
 
+  // Patterns
+  patterns: {
+    extend: {
+      scrollable,
+      flexRow,
+      flexColumn,
+    },
+  },
+
+  // Utilities
   utilities: {
     extend: {
       bgLinGrad,
+    },
+  },
+
+  // Global styles
+  globalCss: {
+    extend: {
+      ...bodyCss,
+      ...todoItemCss,
     },
   },
 
