@@ -89,7 +89,7 @@ export default function Todo(id: string) {
     <FlexRow
       class={"todo-item"}
       marginBottom={1}
-      minHeight={50}
+      minHeight={"60px"}
       paddingX={2}
       gap={1}
       borderRadius={"lg"}

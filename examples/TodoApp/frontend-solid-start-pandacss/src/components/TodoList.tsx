@@ -12,7 +12,7 @@ export default function TodoList() {
       background={"tertiary"}
       flex={"1"}
       paddingX={10}
-      paddingY={6}
+      paddingY={2}
     >
       <TransitionGroup name={"todo-item"}>
         <For each={todos.ids} children={Todo} />
